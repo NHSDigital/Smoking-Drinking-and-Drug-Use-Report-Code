@@ -130,7 +130,7 @@ for details of that process).
 The publication process is run using the top-level script, create_publication.py. 
 This script imports and runs all the required functions and from the sub-modules.
 
-The models are ran using the top level script create_models.py, which uses R and rpy2 to create the models in Python. For more info, check the [README](sdd_code\models\README.md).
+The models are ran using the top level script create_models.py, which uses R and rpy2 to create the models in Python. For more info, check the [README](sdd_code/models/README.md).
 
 # Link to the publication
 https://digital.nhs.uk/data-and-information/publications/statistical/smoking-drinking-and-drug-use-among-young-people-in-england
