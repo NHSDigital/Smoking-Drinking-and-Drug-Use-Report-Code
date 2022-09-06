@@ -2,7 +2,7 @@ Warning - this repository is a snapshot of a repository internal to NHS Digital.
 
 ***Repository owner: Seacole Team***
 
-***Email: lifestyle@nhs.net***
+***Email: lifestyles@nhs.net***
 
 ***To contact us raise an issue on Github or via email and we will respond promptly.***
 
