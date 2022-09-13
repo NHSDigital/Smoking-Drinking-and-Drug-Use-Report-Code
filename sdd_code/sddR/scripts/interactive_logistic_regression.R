@@ -47,7 +47,7 @@ data <- assign_factor_level(data, factor_ref)
 # Model logistic (quasibinomial(link="logit")) based on design
 dranklastwk <- survey_logit(
     data=data,
-    formula = dallastwk ~ age1215 + ethnicgp4 + dcgstg3 + ddgdrugs + truant + dalfam + dfamdrin,
+    formula = dallastwk ~ age1215 + ethnicgp4 + dcgstg3 + ddgdrugs + truant + dalfam + dalwhodr,
     psu= ~archschn,
     strata = ~region,
     weight = ~pupilwt
