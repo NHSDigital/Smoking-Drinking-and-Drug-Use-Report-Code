@@ -320,9 +320,9 @@ def create_breakdown_sex_age1215_nal7ut_whodrink(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_dallast3_dfamdrin_dalfamknw(df):
+def create_breakdown_dallast3_dalwhodr_dalfamknw(df):
 
-    breakdowns = ["dallast3", "dfamdrin"]
+    breakdowns = ["dallast3", "dalwhodr"]
     question = "dalfamknw"
     # Note: dalfamknw should not have a value 8, this filter is only needed so 2018 processing is correct
     filter_condition = "(dalfamknw != 8) & (dalfrq7 in [1, 2, 3, 4, 5, 6])"
@@ -348,8 +348,8 @@ def create_breakdown_sex_age1315_alcohol_buywherebuy(df):
 
 # Drinking context tables begin here
 
-def create_breakdown_sex_age1115_dallast_nal7ut_dfamdrin_dalfam(df):
-    breakdowns = ["sex", "age1115", "dallast3", "nal7utg4", "dfamdrin"]
+def create_breakdown_sex_age1115_dallast_nal7ut_dalwhodr_dalfam(df):
+    breakdowns = ["sex", "age1115", "dallast3", "nal7utg4", "dalwhodr"]
     question = "dalfam"
     filter_condition = None
     subgroup = None
@@ -438,9 +438,9 @@ def create_breakdown_sex_age1115_dallast3_source(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_dfamdrin_dalfam_dfasbands_imdquin_dallast3(df):
+def create_breakdown_dalwhodr_dalfam_dfasbands_imdquin_dallast3(df):
 
-    breakdowns = ["dfamdrin", "dalfam", "dfasbands", "imdquin"]
+    breakdowns = ["dalwhodr", "dalfam", "dfasbands", "imdquin"]
     question = "dallast3"
     filter_condition = "dallast3 in [1, 2, 3]"
     subgroup = None
@@ -836,9 +836,9 @@ def create_breakdown_age1215_dcgoft_method(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_dcgstg3_dfamsmok_dcgsec2(df):
+def create_breakdown_dcgstg3_dcgwhosmo_dcgsec2(df):
 
-    breakdowns = ["dcgstg3", "dfamsmok"]
+    breakdowns = ["dcgstg3", "dcgwhosmo"]
     question = "dcgsec2"
     filter_condition = "dcgstg3 in [1, 2]"
     subgroup = None
@@ -859,9 +859,9 @@ def create_breakdown_sex_age1315_dcgstg3_dcgelbuy(df):
 # Smoking context tables begin here
 
 
-def create_breakdown_dfamsmok_dfasbands_imdquin_dcgstg3(df):
+def create_breakdown_dcgwhosmo_dfasbands_imdquin_dcgstg3(df):
 
-    breakdowns = ["dfamsmok", "dfasbands", "imdquin"]
+    breakdowns = ["dcgwhosmo", "dfasbands", "imdquin"]
     question = "dcgstg3"
     filter_condition = None
     subgroup = {6: [1, 2]}
@@ -893,9 +893,9 @@ def create_breakdown_age1115_dcgstg2_frfamsmoke(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1315_dcgstg3_dfamsmok_dcgfam(df):
+def create_breakdown_sex_age1315_dcgstg3_dcgwhosmo_dcgfam(df):
 
-    breakdowns = ["sex", "age1115", "dcgstg3", "dfamsmok"]
+    breakdowns = ["sex", "age1115", "dcgstg3", "dcgwhosmo"]
     question = "dcgfam"
     filter_condition = None
     subgroup = None
@@ -903,9 +903,9 @@ def create_breakdown_sex_age1315_dcgstg3_dfamsmok_dcgfam(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_dcgstg2_dfamsmok_dcgfam(df):
+def create_breakdown_sex_age1315_dcgstg2_dcgwhosmo_dcgfam(df):
 
-    breakdowns = ["sex", "age1115", "dcgstg2", "dfamsmok"]
+    breakdowns = ["sex", "age1115", "dcgstg2", "dcgwhosmo"]
     question = "dcgfam"
     filter_condition = None
     subgroup = None
