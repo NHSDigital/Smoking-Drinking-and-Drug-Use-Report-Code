@@ -534,14 +534,14 @@ def test_dalfamknw():
     assert actual == expected, f"When checking for dalfamknw, expected to find {expected} but found {actual}"
 
 
-def test_dfamdrin():
+def test_dalwhodr():
     input_df = pd.DataFrame({"alwhodr": [-9, -1, -8, 0, 1, 2, 3, 6]})
-    return_df = derivations.dfamdrin(input_df)
+    return_df = derivations.dalwhodr(input_df)
 
     expected = [-9, -1, -8, 0, 1, 2, 3, 3]
-    actual = return_df["dfamdrin"].astype(int).to_list()
+    actual = return_df["dalwhodr"].astype(int).to_list()
 
-    assert actual == expected, f"When checking for dfamdrin, expected to find {expected} but found {actual}"
+    assert actual == expected, f"When checking for dalwhodr, expected to find {expected} but found {actual}"
 
 
 def test_ddgany(all_drugs=param.DRUGS):
@@ -2662,14 +2662,14 @@ def test_dliflow():
     assert actual == expected, f"When checking for dliflow, expected to find {expected} but found {actual}"
 
 
-def test_dfamsmok():
+def test_dcgwhosmo():
     input_df = pd.DataFrame({"cgwhosmo": [-9, -1, -8, 0, 1, 2, 3, 6]})
-    return_df = derivations.dfamsmok(input_df)
+    return_df = derivations.dcgwhosmo(input_df)
 
     expected = [-9, -1, -8, 0, 1, 2, 3, 3]
-    actual = return_df["dfamsmok"].astype(int).to_list()
+    actual = return_df["dcgwhosmo"].astype(int).to_list()
 
-    assert actual == expected, f"When checking for dfamsmok, expected to find {expected} but found {actual}"
+    assert actual == expected, f"When checking for dcgwhosmo, expected to find {expected} but found {actual}"
     
     
 def test_dmet7dysg():
@@ -2727,3 +2727,13 @@ def test_ddgmultirec():
     actual = return_df["ddgmultirec"].astype(int).to_list()
 
     assert actual == expected, f"When checking for ddgmultirec, expected to find {expected} but found {actual}"
+    
+    
+def test_dwholiv():
+    input_df = pd.DataFrame({"cgwholiv": [-9, -1, 1, 2, 3, 4, 5, 6, 10]})
+    return_df = derivations.dwholiv(input_df)
+
+    expected = [-9, -1, 1, 2, 3, 4, 5, 6, 6]
+    actual = return_df["dwholiv"].astype(int).to_list()
+
+    assert actual == expected, f"When checking for dwholiv, expected to find {expected} but found {actual}"
