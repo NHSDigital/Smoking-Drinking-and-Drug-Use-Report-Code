@@ -60,7 +60,7 @@ if (is.null(opt$factor_ref)) {
     opt$factor_ref <- paste0(DEFAULT_ROOT, "factor_ref.csv")
 }
 if (is.null(opt$formula)) {
-    opt$formula <- "dallastwk ~ age1215 + ethnicgp4 + dcgstg3 + ddgdrugs + truant + dalfam + dfamdrin"
+    opt$formula <- "dallastwk ~ age1215 + ethnicgp4 + dcgstg3 + ddgdrugs + truant + dalfam + dalwhodr"
 }
 if (is.null(opt$strata)) {
     opt$strata <- "region"
