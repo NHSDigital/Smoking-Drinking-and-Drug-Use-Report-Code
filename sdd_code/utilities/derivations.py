@@ -19,7 +19,7 @@ def get_derivations():
     """
     # Create the list of general derivations
     general_derivations = [age1115, age1215, age1315, ethnicgp5, ethnicgp4,
-                           dtruexc, dfas, dfasbands, dmet7dysg]
+                           dtruexc, dfas, dfasbands, dmet7dysg, dwholiv]
 
     # Create the list of derivations relating to alcohol use
 
@@ -29,7 +29,7 @@ def get_derivations():
                            dal7spir, dal7pops, dal7any, dalunitsday,
                            dalshop4, dalpub4, dalgot4, dalbuyper, dalbuyret,
                            dalushmo, dagedrank, daluswho, dalusfre, dalfam,
-                           dalfamknw, dfamdrin, dal4dru5, dallastwk, dlsalc]
+                           dalfamknw, dalwhodr, dal4dru5, dallastwk, dlsalc]
 
     # Create the list of derivations relating to drugs
     drug_derivations = [dusexxx, ddgany, ddgmonany, ddgyrany, ddgdrugs, dlsdrg,
@@ -52,7 +52,7 @@ def get_derivations():
                            dcg7totg2, dcg7day, dcgsmk, dlssmk, dcggetp, dcggets,
                            dcgbuyp, dcgfam, dcgfam4, dcgppfr, dcglongg, dcgstopg,
                            dcgstopwg, dcgtrystp, dcgelbuy, dcggupxxx, dcggupany,
-                           dcgoft, dcgsec2, dcgppfam, dcgshboth, dcgevr, dfamsmok]
+                           dcgoft, dcgsec2, dcgppfam, dcgshboth, dcgevr, dcgwhosmo]
 
     # Create the list of derivations relating to e-cigarette use
     ecig_derivations = [dcgelec, dcgelgtoth, dcgelgtppl, dcgelgtshp, dcgelgtgiv]
@@ -905,16 +905,16 @@ def dalusfre(df):
     return df
 
 
-def dfamdrin(df):
+def dalwhodr(df):
     """
-    Creates the derivation dfamdrin from alwhodr
+    Creates the derivation dalwhodr from alwhodr
     measures number of people pupil lives with who drink
     4 groups (none, one, two, three or more)
 
     """
 
-    df.loc[df["alwhodr"] < 3, "dfamdrin"] = df["alwhodr"]
-    df.loc[df["alwhodr"] > 2, "dfamdrin"] = 3
+    df.loc[df["alwhodr"] < 3, "dalwhodr"] = df["alwhodr"]
+    df.loc[df["alwhodr"] > 2, "dalwhodr"] = 3
 
     return df
 
@@ -3308,16 +3308,16 @@ def dliflow(df):
     return df
 
 
-def dfamsmok(df):
+def dcgwhosmo(df):
     """
-    Creates the derivation dfamsmok from cgwhosmo
+    Creates the derivation dcgwhosmo from cgwhosmo
     measures number of people pupil lives with who smoke
     4 groups (none, one, two, three or more)
 
     """
 
-    df.loc[df["cgwhosmo"] < 3, "dfamsmok"] = df["cgwhosmo"]
-    df.loc[df["cgwhosmo"] > 2, "dfamsmok"] = 3
+    df.loc[df["cgwhosmo"] < 3, "dcgwhosmo"] = df["cgwhosmo"]
+    df.loc[df["cgwhosmo"] > 2, "dcgwhosmo"] = 3
 
     return df
 
@@ -3410,5 +3410,17 @@ def ddgmultirec(df):
 
     # Drop the check variable
     df.drop(["check"], axis=1, inplace=True)
+
+    return df
+
+
+def dwholiv(df):
+    """
+    Creates the derivation dwholiv from cgwholiv
+    measures number of people pupil lives with
+    6 groups (one, two, three, four, five, six or more)
+    """
+    df.loc[df["cgwholiv"] < 6, "dwholiv"] = df["cgwholiv"]
+    df.loc[df["cgwholiv"] > 5, "dwholiv"] = 6
 
     return df
