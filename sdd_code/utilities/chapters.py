@@ -122,7 +122,7 @@ def get_chapters():
                  },
                 {
                     "name": "Fam_LastDr_LivesWith",
-                    "content": [tables.create_breakdown_dallast3_dfamdrin_dalfamknw]
+                    "content": [tables.create_breakdown_dallast3_dalwhodr_dalfamknw]
                  },
                 {
                     "name": "Buy_WhereBuy",
@@ -138,7 +138,7 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "ParentAttitude",
-                    "content": [tables.create_breakdown_sex_age1115_dallast_nal7ut_dfamdrin_dalfam]
+                    "content": [tables.create_breakdown_sex_age1115_dallast_nal7ut_dalwhodr_dalfam]
                  },
                 {
                     "name": "ParentAttitude_Current",
@@ -178,7 +178,7 @@ def get_chapters():
                  },
                 {
                     "name": "LastDrank",
-                    "content": [tables.create_breakdown_dfamdrin_dalfam_dfasbands_imdquin_dallast3]
+                    "content": [tables.create_breakdown_dalwhodr_dalfam_dfasbands_imdquin_dallast3]
                 },
             ],
         },
@@ -341,7 +341,7 @@ def get_chapters():
                 },
                 {
                     "name": "FamAware",
-                    "content": [tables.create_breakdown_dcgstg3_dfamsmok_dcgsec2]
+                    "content": [tables.create_breakdown_dcgstg3_dcgwhosmo_dcgsec2]
                 },
                 {
                     "name": "ShopAskSuccess",
@@ -365,15 +365,15 @@ def get_chapters():
                 },                
                 {
                     "name": "SmokingStatus",
-                    "content": [tables.create_breakdown_dfamsmok_dfasbands_imdquin_dcgstg3]
+                    "content": [tables.create_breakdown_dcgwhosmo_dfasbands_imdquin_dcgstg3]
                 },
                 {
                     "name": "FamilyAttitude",
-                    "content": [tables.create_breakdown_sex_age1315_dcgstg3_dfamsmok_dcgfam]
+                    "content": [tables.create_breakdown_sex_age1315_dcgstg3_dcgwhosmo_dcgfam]
                 },
                 {
                     "name": "FamilyAttitudev2",
-                    "content": [tables.create_breakdown_sex_age1315_dcgstg2_dfamsmok_dcgfam]
+                    "content": [tables.create_breakdown_sex_age1315_dcgstg2_dcgwhosmo_dcgfam]
                 },
                 {
                     "name": "FamilyAttCurrent",
