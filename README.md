@@ -1,6 +1,6 @@
 Warning - this repository is a snapshot of a repository internal to NHS Digital. This means that links to videos and some URLs may not work.***
 
-***Repository owner: Seacole Team***
+***Repository owner: Analytical Services: Population Health, Clinical Audit and Specialist Care***
 
 ***Email: lifestyles@nhs.net***
 
