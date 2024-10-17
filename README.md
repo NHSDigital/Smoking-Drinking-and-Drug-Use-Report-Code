@@ -6,31 +6,12 @@ Warning - this repository is a snapshot of a repository internal to NHS Digital.
 
 ***To contact us raise an issue on Github or via email and we will respond promptly.***
 
-# Getting Started
+# Smoking, drinking and drug use amongst young people (SDD) survey background
 
-## Clone repository
-To clone respositary, please see our [community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/development-approach/02_using-git-collaboratively.md).
+This repository contains the code used by NHS England to create publication outputs from the 2021 SDD survey. 
 
-## Set up environment
-There are two options to set up the python enviroment:
-1. Pip using `requirements.txt`.
-2. Conda using `environment.yml`.
-
-Users would need to delete as appropriate which set they do not need. For details, please see our [virtual environments in the community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/python/virtual-environments.md).
-
-
-To set up the sdd_code package enter the commands below (run one line at a time) in Anaconda Prompt (terminal on Mac/Linux):
-```
-pip install --user -r requirements.txt
-```
-
-or if using conda environments:
-```
-conda env create -f environment.yml
-```
-Then follow the instructions in [sdd_code/sddR/README.md](sdd_code/sddR/README.md) to setup the R packages.
-
-# Smoking, drinking and drug use amongst young people (SDD) background
+***Results from the 2023 survey were published on 17th October 2024.
+The updated version of the repository used to create the 2023 outputs will be published to GitHub later in 2024.***
 
 The SDD dataset contains results from a biennial survey of secondary school pupils 
 in England in years 7 to 11 (mostly aged 11 to 15), focusing on smoking, drinking
@@ -44,6 +25,29 @@ teacher responses.
 This project produces the required publication outputs: Data tables, charts, raw
 data file for the UK data archive.
 
+# Getting Started
+
+## Clone repository
+To clone respositary, please see our [community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/development-approach/02_using-git-collaboratively.md).
+
+## Set up environment
+There are two options to set up the python enviroment:
+1. Pip using `requirements.txt`.
+2. Conda using `environment.yml`.
+
+Users would need to delete as appropriate which set they do not need. For details, please see our [virtual environments in the community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/python/virtual-environments.md).
+
+
+Run the following command in Terminal or VScode to set up the packages:
+```
+pip install --user -r requirements.txt
+```
+
+or if using conda environments:
+```
+conda env create -f environment.yml
+```
+Then follow the instructions in [sdd_code/sddR/README.md](sdd_code/sddR/README.md) to setup the R packages.
 
 # Directory structure:
 ```
