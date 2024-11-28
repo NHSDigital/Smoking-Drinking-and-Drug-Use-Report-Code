@@ -1,0 +1,43 @@
+name: SDD
+channels:
+  # If conda-forge is available, then can manage R dependencies
+  # via conda, uncomment packages and remove rpy2 from pip installs
+  # - conda-forge
+  - defaults
+dependencies:
+  - python = 3.7.6
+  - pip = 21.2.4
+
+  # Core data manipulation modules
+  - numpy = 1.21.5
+  - pandas = 1.3.5
+
+  # Excel output
+  - xlwings = 0.24.9
+
+  # Testing
+  - pytest = 6.2.5
+
+  # Enable using conda environments with spyder 4.2.0
+  # For spyder 5 need spyder-kernels 2.*
+  # For more info: http://docs.spyder-ide.org/current/troubleshooting/common-illnesses.html#spyder-kernels-not-installed-incompatible
+  - spyder-kernels = 1.10.0
+
+  # R packages - not recommended to install via conda:
+  # - rpy2 #=3.4.5
+  # - r-rstudio
+  # - r-essentials #=3.6.0
+  # - r-renv #=0.13.2
+  # - r-survey #=4.0
+  # - r-here #=0.1
+  # - r-getopt #=1.20.3
+  # - r-data.table #=1.12.2
+
+ # PIP packages
+  - pip:
+    # Reading SPSS files
+    - pyreadstat==1.1.4
+    # Pretty HTML output
+    - pytest-html==3.1.1
+    # Integrate with R
+    - rpy2==3.4.5
