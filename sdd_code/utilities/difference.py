@@ -26,7 +26,7 @@ def get_source_data(output_path: str):
         "file" key to the file that this dataframe came from.
     """
 
-    # retrive the previous year source filename from the main output path
+    # retrieve the previous year source filename from the main output path
     filename = Path(output_path).name
     source_file = param.PREVYEAR_DIR / filename
 
@@ -47,10 +47,10 @@ def get_breakdown_cols(df: pd.DataFrame, breakdown_col: str):
     """Get the individual breakdown columns from a column of
     breakdown_types.
 
-    Breakdown_type will be a string like: "sex_age1115_region_dallast5"
+    Breakdown_type will be a string like: "gender_age1115_region_dallast5"
     We wish to extract the individual cols separated by underscores. However,
     sometimes there may be column names with underscores within them, e.g:
-    "sex_age1115_region_unit_drinkdays" where unit_drinkdays is the column of interest.
+    "gender_age1115_region_unit_drinkdays" where unit_drinkdays is the column of interest.
     To get these, we find all 1 and 2 length combination of columns, and check if they
     are in the dataframe.
 

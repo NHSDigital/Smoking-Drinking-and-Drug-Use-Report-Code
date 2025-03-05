@@ -19,7 +19,7 @@ It additionally calculates the ANOVA for the model, and outputs a 2 element list
 
 ### 2. assign_factor_level
 
-When modelling a logistic regression, categorical model effects are modeled against a "reference level". This is one category of the effect that all others are compared against. This function ensures that all categorical effects are [factors](https://www.stat.berkeley.edu/~s133/factors.html) in the data.frame, and sets the reference levels using the factors data.frame passed in.
+When modelling a logistic regression, categorical model effects are modelled against a "reference level". This is one category of the effect that all others are compared against. This function ensures that all categorical effects are [factors](https://www.stat.berkeley.edu/~s133/factors.html) in the data.frame, and sets the reference levels using the factors data.frame passed in.
 
 ### 3. format_model_output
 

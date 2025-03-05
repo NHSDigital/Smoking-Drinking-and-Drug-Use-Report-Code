@@ -9,6 +9,32 @@ from sdd_code.utilities import stats
 from sdd_code.utilities import stats_R
 
 
+def teacher_drop_lesson_prefix(df_teacher):
+    """
+    Drops the prefixes lessonsmok_, lessonsalc_, and lessonsdrg_ from field names in
+    the teacher dataset for 2023 (to undo name change in raw dataset).
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        teacher dataset
+
+    Returns
+    -------
+    df : pandas.DataFrame
+        teacher dataset with the updated column names.
+
+    """
+    # Set the prefix strings to drop
+    drop_list = ["lessonsmok_", "lessonalc_", "lessondrg_", "lessonvap_"]
+
+    # Drop the strings from any questions where they are present
+    for prefix in drop_list:
+        df_teacher.columns = df_teacher.columns.str.replace(prefix, "")
+
+    return df_teacher
+
+
 def create_domain(df, domains):
     """Creates a single domain column from a list of domains.
 
@@ -51,8 +77,8 @@ def safe_check_columns_eq(df, col1, col2):
     """
     # Keep in 1 df rather than just passing in columns for dropna
     check_df = df.loc[:, [col1, col2]]
-    check_df.loc[:, col1] = pd.to_numeric(check_df[col1], errors="coerce")
-    check_df.loc[:, col2] = pd.to_numeric(check_df[col2], errors="coerce")
+    check_df[col1] = pd.to_numeric(check_df[col1], errors="coerce")
+    check_df[col2] = pd.to_numeric(check_df[col2], errors="coerce")
     check_df.dropna(inplace=True)
 
     assert np.isclose(
@@ -70,7 +96,7 @@ def add_response_subgroup(df, breakdowns, question, subgroup):
     df : pandas.DataFrame
         Record-level data with pupil breakdowns, question and counts
     breakdowns: list[str]
-        Columns to use in the breakdowns (e.g. age, sex, etc)
+        Columns to use in the breakdowns (e.g. age, gender, etc)
     question: str
         Single variable name that defines the question to be analysed
         (e.g. dallast5, alevr)
@@ -87,7 +113,7 @@ def add_response_subgroup(df, breakdowns, question, subgroup):
         subgroup = df[df[question].isin(subgroup_values)]
         subgroup = subgroup.groupby([*breakdowns]).sum().reset_index()
         subgroup[question] = subgroup_code
-        df = df.append(subgroup)
+        df = pd.concat([df, subgroup], ignore_index=True)
 
     return df.reset_index(drop=True)
 
@@ -102,7 +128,7 @@ def add_breakdown_groups(df, breakdowns, question):
     3. Overall across all records
 
     For 2 and 3, the column(s) excluded from the breakdown (e.g. age if
-    breaking down by sex) has all values replaced by param.TOT_CODE to
+    breaking down by gender) has all values replaced by param.TOT_CODE to
     indicate that it is the group that includes all values in the column(s)
 
     Parameters
@@ -110,7 +136,7 @@ def add_breakdown_groups(df, breakdowns, question):
     df : pandas.DataFrame
         Record-level data to breakdown
     breakdowns: list[str]
-        Columns to use in the breakdowns (e.g. age, sex, etc)
+        Columns to use in the breakdowns (e.g. age, gender, etc)
     question: str
         Single variable name that defines the question to be analysed
         (e.g. dallast5, alevr)
@@ -127,14 +153,14 @@ def add_breakdown_groups(df, breakdowns, question):
 
     # Combinations of columns to be replaced with params.TOT_CODE
     # Firstly don't replace any, then replace a single column, then 2 columns, etc
-    # E.g. [[], ["sex"], ["age"], ["sex", "age"], ...]
+    # E.g. [[], ["gender"], ["age"], ["gender", "age"], ...]
     n_replacements = len(breakdowns) + 1
     replace_combinations = [combinations(breakdowns, n) for n in range(n_replacements)]
     replace_combinations = chain.from_iterable(replace_combinations)
 
     for columns_to_replace in replace_combinations:
         # Make a copy of df with default values for non-grouped columns
-        # inserted (e.g. replace values in 'sex' with 99)
+        # inserted (e.g. replace values in 'gender' with 99)
         default_df = df.copy()
 
         for col in columns_to_replace:
@@ -150,13 +176,14 @@ def add_breakdown_groups(df, breakdowns, question):
 def transpose_multi(df, breakdowns, question):
     """
     Creates a single column for multi-response question options
-    The multi-response options are fed in as individual columns in addition to breakdown and weighting
+    The multi-response options are fed in as individual columns in addition
+    to breakdown and weighting
 
     Parameters
     ----------
     df : pandas.DataFrame
     breakdowns : list[str]
-        these are the pupil breakdowns from the table e.g. sex and age1115.
+        these are the pupil breakdowns from the table e.g. gender and age1115.
     question: str
         this is the name to be allocated to the column in the output that
          will contain the multi response options
@@ -164,10 +191,12 @@ def transpose_multi(df, breakdowns, question):
     Returns
     -------
     df : pandas.DataFrame
-        with the individual response variables as a single column named as per the 'question' input
+        with the individual response variables as a single column named as
+        per the 'question' input
 
     """
-    # Set the index on all columns except those that are to be transposed to a single column
+    # Set the index on all columns except those that are to be transposed to
+    # a single column
     df.set_index([*breakdowns, param.WEIGHTING_VAR], inplace=True)
     # Transpose the non-index columns into a single new column
     df = df.stack().rename_axis(index={None: question}).rename("Value").reset_index()
@@ -229,8 +258,8 @@ def add_percentage(
     df, numerator="NumerW", denominator="DenomW", denominator_sup="DenomW"
 ):
     """
-    Adds a perentage calculation
-    Supresses percents wusing suppress_column
+    Adds a percentage calculation
+    Suppresses percents using suppress_column
 
     Parameters
     ----------
@@ -241,12 +270,12 @@ def add_percentage(
     denominator : str
         Column to use as denominator for percentage (default='DenomW')
     denominator_sup : str
-        Column to use for the supression check (default='DenomU')
+        Column to use for the suppression check (default='DenomU')
 
     Returns
     -------
     pandas.DataFrame
-        Copy df with Percentage column added (including required supression
+        Copy df with Percentage column added (including required suppression
         and warning symbols)
 
     """
@@ -269,7 +298,7 @@ def format_breakdown_output(df, breakdowns, question, column_order, year=param.Y
     ----------
     df : pandas.DataFrame
     breakdown : list[str]
-        these are the pupil breakdowns from the table e.g. sex and age1115.
+        these are the pupil breakdowns from the table e.g. gender and age1115.
     question: str
         Single variable name that defines the question to be analysed
         (e.g. dallast5, alevr)
@@ -366,7 +395,7 @@ def create_breakdown_single(
     ----------
     df : pandas.DataFrame
     breakdowns : list[str]
-        these are the pupil breakdowns from the table e.g. sex and age1115
+        these are the pupil breakdowns from the table e.g. gender and age1115
         if None, default value of 9999 will be used under heading 'grouping'
     question: str
         Single variable name that defines the question to be analysed
@@ -376,7 +405,8 @@ def create_breakdown_single(
          needed for some tables. It may consist of one or more filters of the
          dataframe variables.
     subgroup: dictionary
-        Optional input where a grouped response is reported, requiring a new response subgroup.
+        Optional input where a grouped response is reported, requiring a new
+        response subgroup.
         Contains the new response code(s) that will be assigned to the new grouping(s),
          and the response values that will form the group.
     create_SE: bool
@@ -445,7 +475,7 @@ def create_breakdown_single(
     # Join the bases to the weighted counts
     output = numer_df.merge(denom_df, how="left", on=breakdowns)
 
-    # Add the percentages including supression/warnings
+    # Add the percentages including suppression/warnings
     output = add_percentage(output)
 
     if create_SE:
@@ -487,10 +517,9 @@ def create_breakdown_single(
                     ]
                 )
 
-            # Attach all individual se df together
-            standard_errors = standard_errors.append(
-                pd.concat(se_subgroup_list)
-            )
+            # Append the subgroups to the original standard errors
+            standard_errors = pd.concat([standard_errors, *se_subgroup_list],
+                                        ignore_index=True)
 
         # Join the variance calculations to both
         output = output.merge(standard_errors, how="left", on=[*breakdowns, question])
@@ -537,7 +566,7 @@ def create_breakdown_single_combine(
     ----------
     df : pandas.DataFrame
     breakdowns : list[str]
-        optional breakdowns from the table e.g. ["sex", "age1115"]
+        optional breakdowns from the table e.g. ["gender", "age1115"]
     questions: list[str]
         list of questions to be used for outputs e.g. ["y7smok", "y8smok"]
     filter_condition: str
@@ -586,7 +615,8 @@ def create_breakdown_single_combine(
         dfq = create_breakdown_single(df, breakdowns, question,
                                       filter_condition, subgroup, create_SE)
 
-        # rename the question column to be a generic response column and insert the question as a new column
+        # rename the question column to be a generic response column and insert
+        # the question as a new column
         dfq.rename(columns={question: "Response"}, inplace=True)
         dfq.insert(2, "Question", question)
 
@@ -617,7 +647,7 @@ def create_breakdown_multiple_discrete(
     ----------
     df : pandas.DataFrame
     breakdowns : list[str]
-        these are the pupil breakdowns from the table e.g. sex and age1115.
+        these are the pupil breakdowns from the table e.g. gender and age1115.
     responses : list[str]
         these are the list of variables that contain responses options to this question.
     question: str
@@ -657,7 +687,8 @@ def create_breakdown_multiple_discrete(
         else:
             filtered = df.query(filter_condition)
 
-        # Filter to pupils with a valid response to the question used as the base (not negative).
+        # Filter to pupils with a valid response to the question used as the
+        # base (not negative).
         filtered = filtered[filtered[base] >= 0].copy(deep=True)
 
         # Rename the base variable
@@ -681,7 +712,8 @@ def create_breakdown_multiple_discrete(
         # Transpose the individual response columns into a single question column
         select = transpose_multi(
             df=select,
-            breakdowns=[col for col in select_cols if col not in [response, param.WEIGHTING_VAR]],
+            breakdowns=[col for col in select_cols if col not in [response,
+                                                                  param.WEIGHTING_VAR]],
             question=question,
         )
 
@@ -739,7 +771,8 @@ def create_breakdown_multiple_discrete(
 
             # Suppress column based on similar rules as percentages
             for col in ["std_err", "lower_ci", "upper_ci", "deff"]:
-                output.loc[:, col] = suppress_column(output[col], output["DenomW"], round_to_dp=1)
+                output.loc[:, col] = suppress_column(output[col], output["DenomW"],
+                                                     round_to_dp=1)
         else:
             for col in ["std_err", "lower_ci", "upper_ci", "deff"]:
                 output[col] = np.nan
@@ -786,7 +819,7 @@ def create_breakdown_multiple_cont(
     ----------
     df : pandas.DataFrame
     breakdowns : list[str]
-        these are the pupil breakdowns from the table e.g. sex and age1115.
+        these are the pupil breakdowns from the table e.g. gender and age1115.
     responses : list[str]
         these are the list of variables that contain responses options to this question.
     question: str
@@ -818,7 +851,8 @@ def create_breakdown_multiple_cont(
     else:
         filtered = df.query(filter_condition)
 
-    # Filter to pupils with a valid response to the question used as the base (not negative).
+    # Filter to pupils with a valid response to the question used as the base
+    # (not negative).
     filtered = filtered[filtered[base] >= 0].copy(deep=True)
 
     # Use set() in case param.STRATA is in breakdowns, ensure uniqueness
@@ -837,7 +871,8 @@ def create_breakdown_multiple_cont(
     # Transpose the individual response columns into a single column
     select = transpose_multi(
         df=select,
-        breakdowns=[col for col in select_cols if col not in [*responses, param.WEIGHTING_VAR]],
+        breakdowns=[col for col in select_cols if col not in [*responses,
+                                                              param.WEIGHTING_VAR]],
         question=question,
     )
 
@@ -850,7 +885,7 @@ def create_breakdown_multiple_cont(
     select = add_breakdown_groups(select, breakdowns, question)
 
     # Create aggregations including the sum of the total response options that
-    # is used for the perentage denominator
+    # is used for the percentage denominator
     aggregations = {
         "NumerW": ("weighted_num", "sum"),
         "DenomW": (param.WEIGHTING_VAR, "sum"),
@@ -861,7 +896,7 @@ def create_breakdown_multiple_cont(
     # Group the data to create the weighted counts.
     grouped = select.groupby([*breakdowns, question]).agg(**aggregations).reset_index()
 
-    # Add the percentages including supression/warnings
+    # Add the percentages including suppression/warnings
     # Use Total weighted sum as denom rather than the usual default
     output = add_percentage(
         df=grouped,
@@ -893,7 +928,8 @@ def create_breakdown_multiple_cont(
 
         # Suppress column based on similar rules as percentages
         for col in ["std_err", "lower_ci", "upper_ci", "deff"]:
-            output.loc[:, col] = suppress_column(output[col], output["DenomW"], round_to_dp=1)
+            output.loc[:, col] = suppress_column(output[col], output["DenomW"],
+                                                 round_to_dp=1)
     else:
         for col in ["std_err", "lower_ci", "upper_ci", "deff"]:
             output[col] = np.nan
@@ -923,12 +959,11 @@ def create_breakdown_statistics(df, breakdowns, questions, base, filter_conditio
     Creates an output that includes statistics needed for the tables
     (based on one or more breakdowns)
     includes weighted mean, median and standard errors
-    TODO: add standard error columns
     Parameters
     ----------
     df : pandas.DataFrame
     breakdowns : list[str]
-        these are the pupil breakdowns from the table e.g. sex and age1115.
+        these are the pupil breakdowns from the table e.g. gender and age1115.
     questions: list[str]
         One or more variable names that defines the question in the survey for
         which the statistics will be created (e.g. nal7ut)
@@ -1018,7 +1053,8 @@ def create_breakdown_statistics(df, breakdowns, questions, base, filter_conditio
         safe_check_columns_eq(output, "R_Mean", "Mean")
         safe_check_columns_eq(output, "R_Median", "Median")
 
-        # Insert a column that identifies the question from which the statistics are calculated
+        # Insert a column that identifies the question from which the statistics
+        # are calculated
         output.insert(0, "Question", question)
 
         # Applies final output formatting

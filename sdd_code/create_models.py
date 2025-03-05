@@ -5,7 +5,7 @@ import timeit
 import pandas as pd
 import xlwings as xw
 
-from sdd_code.utilities import derivations
+from sdd_code.utilities.field_definitions import derivations, exclusion_flags
 from sdd_code.utilities import logger_config
 from sdd_code.utilities import parameters as param
 from sdd_code.utilities.data_import import import_sav_values
@@ -15,15 +15,20 @@ from sdd_code.models import model_tables
 def main():
     df = import_sav_values(file_path=param.PUPIL_DATA_PATH, drop_col=param.DROP_COLUMNS)
 
-    # Add derived variables from the derivations module, based on the list in all_derivations
+    # Add derived variables from the derivations module, based on the list
+    # in all_derivations
     all_derivations = derivations.get_derivations()
 
     for derivation in all_derivations:
         logging.info(f"Creating derivation {derivation.__name__}")
         df = derivation(df)
+    all_flags = exclusion_flags.get_flags()
+    for flag in all_flags:
+        logging.info(f"Creating exclusion flag {flag.__name__}")
+        df = flag(df)
 
-    # Treat all missing the same for models
-    df = df.replace([-8, -1], -9)
+    # Treat all missing values the same for models
+    df = df.replace([-7, -8, -1], -9)
 
     # Where to save models, and model functions
     output = model_tables.get_models()

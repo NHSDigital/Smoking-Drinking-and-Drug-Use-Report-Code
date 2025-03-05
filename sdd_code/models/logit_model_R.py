@@ -40,7 +40,7 @@ def logit_model(
         model_effects: list[str]
             The effect variables
         bubble_factor: int
-            Multipying factor for bubble visualisation of model effects
+            Multiplying factor for bubble visualisation of model effects
         strata:
             The strata variable in the dataset, defaults to value in parameters.py
         weight:

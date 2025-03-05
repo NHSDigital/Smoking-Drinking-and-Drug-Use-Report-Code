@@ -23,62 +23,62 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "Ever_Drank",
-                    "content": [tables.create_breakdown_sex_age1115_region_ethnicgp5_alevr]
+                    "content": [tables.create_breakdown_dgender_age1115_region_ethnicgp5_alevr]
                 },
                 {
                     "name": "Last_Drank",
-                    "content": [tables.create_breakdown_sex_age1115_region_ethnicgp5_dallast5]
+                    "content": [tables.create_breakdown_dgender_age1115_region_ethnicgp5_dallast5]
                 },
                 {
                     "name": "Day_Drank",
-                    "content": [tables.create_breakdown_sex_age1315_daysdrank]
+                    "content": [tables.create_breakdown_dgender_age1315_daysdrank]
                 },
                 {
                     "name": "Units_LastWk",
-                    "content": [tables.create_breakdown_sex_age1315_nal7utg7]
+                    "content": [tables.create_breakdown_dgender_age1315_nal7utg7]
                 },
                 {
                     "name": "Drink_Freq",
-                    "content": [tables.create_breakdown_sex_age1115_dalfrq7]
+                    "content": [tables.create_breakdown_dgender_age1115_dalfrq7]
                 },
                 {
                     "name": "Stats_Sex_Age1315",
                     "content": [
-                        tables.create_breakdown_stats_sex_age1315_nal7,
-                        tables.create_breakdown_stats_sex_age1315_al7
+                        tables.create_breakdown_stats_dgender_age1315_nal7,
+                        tables.create_breakdown_stats_dgender_age1315_al7
                         ]
                 },
                 {
                     "name": "Age_First_Drunk",
-                    "content": [tables.create_breakdown_sex_dalagedru]
+                    "content": [tables.create_breakdown_dgender_dalagedru]
                 },
                 {
                     "name": "Drank_Drunk_Ever",
-                    "content": [tables.create_breakdown_sex_age1115_daldrunk]
+                    "content": [tables.create_breakdown_dgender_age1115_daldrunk]
                 },
                 {
                     "name": "Drank_Drunk_Last4Wk",
-                    "content": [tables.create_breakdown_sex_age1115_dal4dru5]
+                    "content": [tables.create_breakdown_dgender_age1115_dal4dru5]
                 },
                 {
                     "name": "Type_Total_LastWk",
-                    "content": [tables.create_breakdown_sex_typedrank]
+                    "content": [tables.create_breakdown_dgender_typedrank]
                 },
                 {
                     "name": "Days_LastWk",
-                    "content": [tables.create_breakdown_sex_age1315_al7day]
+                    "content": [tables.create_breakdown_dgender_age1315_dal7day]
                 },
                 {
                     "name": "Age_First_Drank",
-                    "content": [tables.create_breakdown_sex_dagedrank]
+                    "content": [tables.create_breakdown_dgender_dagedrank]
                 },
                 {
                     "name": "Type_LastWk",
-                    "content": [tables.create_breakdown_sex_age1315_dal7]
+                    "content": [tables.create_breakdown_dgender_age1315_dal7]
                 },
                 {
                     "name": "Units_DrinkDays",
-                    "content": [tables.create_breakdown_sex_age1315_dalunitsday]
+                    "content": [tables.create_breakdown_dgender_age1315_dalunitsday]
                 },
             ],
         },
@@ -90,43 +90,43 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "Drank4Wks_TimesDrunk",
-                    "content": [tables.create_breakdown_sex_age1315_dal4dru5]
+                    "content": [tables.create_breakdown_dgender_age1315_dal4dru5]
                  },
                 {
                     "name": "HowObtain_All",
-                    "content": [tables.create_breakdown_alcohol_howobtain]
+                    "content": [tables.create_breakdown_alcohol_howobtain_all]
                  },
                 {
                     "name": "HowObtain",
-                    "content": [tables.create_breakdown_sex_age1215_nal7ut_howobtain]
+                    "content": [tables.create_breakdown_alcohol_howobtain]
                  },
                 {
                     "name": "WhereBuy",
-                    "content": [tables.create_breakdown_sex_age1215_nal7ut_wherebuy]
+                    "content": [tables.create_breakdown_dgender_age1215_nal7ut_wherebuy]
                  },
                 {
                     "name": "WhereDrink",
-                    "content": [tables.create_breakdown_sex_age1215_nal7ut_wheredrink]
+                    "content": [tables.create_breakdown_dgender_age1215_nal7ut_wheredrink]
                  },
                 {
                     "name": "Drunk4Wks_Tried",
-                    "content": [tables.create_breakdown_sex_age1315_al4wdedr]
+                    "content": [tables.create_breakdown_dgender_age1315_al4wdedr]
                 },
                 {
                     "name": "Drunk4Wks_Adverse",
-                    "content": [tables.create_breakdown_sex_dal4dru5_drunkadverse]
+                    "content": [tables.create_breakdown_dgender_dal4dru5_drunkadverse]
                 },
                 {
                     "name": "WhoDrink",
-                    "content": [tables.create_breakdown_sex_age1215_nal7ut_whodrink]
+                    "content": [tables.create_breakdown_dgender_age1215_nal7ut_whodrink]
                  },
                 {
                     "name": "Fam_LastDr_LivesWith",
-                    "content": [tables.create_breakdown_dallast3_dalwhodr_dalfamknw]
+                    "content": [tables.create_breakdown_dallast3_dalfamknw]
                  },
                 {
                     "name": "Buy_WhereBuy",
-                    "content": [tables.create_breakdown_sex_age1315_alcohol_buywherebuy]
+                    "content": [tables.create_breakdown_age1315_alcohol_buywherebuy]
                 },
             ],
         },
@@ -138,7 +138,7 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "ParentAttitude",
-                    "content": [tables.create_breakdown_sex_age1115_dallast_nal7ut_dalwhodr_dalfam]
+                    "content": [tables.create_breakdown_dgender_age1115_dallast_nal7ut_dalfam]
                  },
                 {
                     "name": "ParentAttitude_Current",
@@ -149,36 +149,20 @@ def get_chapters():
                     "content": [tables.create_breakdown_dalfam_dal4dru5]
                  },
                 {
-                    "name": "Consequences",
-                    "content": [tables.create_breakdown_sex_age1115_drinking_consequences]
-                 },
-                {
                     "name": "Attitudes",
-                    "content": [tables.create_breakdown_sex_age1115_dallast_attitudes]
+                    "content": [tables.create_breakdown_dgender_age1115_dallast_attitudes]
                  },
                 {
                     "name": "Attitudes_DrunkLast4wk",
                     "content": [tables.create_breakdown_dal4dru_attitudes]
                 },
                 {
-                    "name": "Beliefs",
-                    "content": [tables.create_breakdown_sex_age1115_dallast3_beliefs]
-                 },
-                {
-                    "name": "PerceptionDrink",
-                    "content": [tables.create_breakdown_sex_age1115_alestim]
-                 },
-                {
-                    "name": "PerceptionDrink15",
-                    "content": [tables.create_breakdown_dallast3_alestim]
-                 },
-                {
-                    "name": "SourceInfo",
-                    "content": [tables.create_breakdown_sex_age1115_dallast3_source]
-                 },
-                {
                     "name": "LastDrank",
-                    "content": [tables.create_breakdown_dalwhodr_dalfam_dfasbands_imdquin_dallast3]
+                    "content": [tables.create_breakdown_dalfam_dfasbands_imdquin_dallast3]
+                },
+                {
+                    "name": "LastDrankAll",
+                    "content": [tables.create_breakdown_dfasbands_imdquin_dallast3]
                 },
             ],
         },
@@ -190,11 +174,11 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "PupilLessons",
-                    "content": [tables.create_breakdown_sex_syear_puplessons]
+                    "content": [tables.create_breakdown_dgender_syear_puplessons]
                  },
                 {
                     "name": "EnoughInfo",
-                    "content": [tables.create_breakdown_sex_syear_info]
+                    "content": [tables.create_breakdown_dgender_syear_info]
                  },
                 {
                     "name": "SchoolLessons",
@@ -237,15 +221,15 @@ def get_chapters():
             "output_path": param.OUTPUT_DIR / "MasterFiles" / "sdd_smokingprev_source.xlsx",
             "table_path": param.OUTPUT_DIR / "MasterFiles" / "sdd_smokingprev_datatables_master.xlsx",
             "run_chapter": param.CHAPTER_SMOKING_PREVALANCE,
-            "chapter_number": "1",
+            "chapter_number": "1", 
             "sheets": [
                 {
                     "name": "SmokingStatus",
-                    "content": [tables.create_breakdown_sex_age_region_ethnicgp5_dcgstg5]
+                    "content": [tables.create_breakdown_dgender_age_region_ethnicgp5_dcgstg5]
                 },
                 {
                     "name": "SmokedLastWeek",
-                    "content": [tables.create_breakdown_sex_age_cg7]
+                    "content": [tables.create_breakdown_dgender_age_cg7]
                 },
                 {
                     "name": "CigLastWeek",
@@ -257,11 +241,11 @@ def get_chapters():
                 },
                 {
                     "name": "Stats_Current",
-                    "content": [tables.create_breakdown_stats_sex_dcgstg3_dcg7tot]
+                    "content": [tables.create_breakdown_stats_dgender_dcgstg3_dcg7tot]
                 },
                 {
-                    "name": "Stats_SmokedLastWeek",
-                    "content": [tables.create_breakdown_stats_sex_dcgstg3_cg7]
+                   "name": "Stats_SmokedLastWeek",
+                   "content": [tables.create_breakdown_stats_dgender_dcgstg3_cg7]
                 },
             ],
         },
@@ -280,32 +264,8 @@ def get_chapters():
                     "content": [tables.create_breakdown_age1315_cgdiff]
                 },
                 {
-                    "name": "TrybuyShop",
-                    "content": [tables.create_breakdown_age1115_cgshop]
-                },
-                {
-                    "name": "RefusedShop",
-                    "content": [tables.create_breakdown_age1315_cgref]
-                },
-                {
-                    "name": "RefusedShopMRecent",
-                    "content": [tables.create_breakdown_age1315_cglast]
-                },
-                {
-                    "name": "ShopAskAll",
-                    "content": [tables.create_breakdown_sex_age1115_cgshopp]
-                },
-                {
-                    "name": "ShopAskCurrent",
-                    "content": [tables.create_breakdown_dcgstg3_cgshopp]
-                },
-                {
-                    "name": "FreqShops",
-                    "content": [tables.create_breakdown_cgbuyf]
-                },
-                {
                     "name": "SourceCurrent",
-                    "content": [tables.create_breakdown_dcgstg3_sex_age1315_cgsourcecurr]
+                    "content": [tables.create_breakdown_dcgstg3_dgender_age1315_cgsourcecurr]
                 },
                 {
                     "name": "SourceRegular",
@@ -313,7 +273,7 @@ def get_chapters():
                 },
                 {
                     "name": "LengthTime",
-                    "content": [tables.create_breakdown_sex_cglong]
+                    "content": [tables.create_breakdown_dgender_cglong]
                 },
                 {
                     "name": "DiffQuit",
@@ -328,24 +288,16 @@ def get_chapters():
                     "content": [tables.create_breakdown_dcglongg_dcg7totg2_depend]
                 },
                 {
-                    "name": "ShopAskSuccessCurrent",
-                    "content": [tables.create_breakdown_dcgstg3_dcgelbuy]
-                },
-                {
                     "name": "AttitudeQuitFut",
-                    "content": [tables.create_breakdown_sex_dcgtrystp]
+                    "content": [tables.create_breakdown_dgender_dcgtrystp]
                 },
                 {
                     "name": "StopSmokeMethods",
-                    "content": [tables.create_breakdown_age1215_dcgoft_method]
+                    "content": [tables.create_breakdown_age1215_dcgoft_methodv2]
                 },
                 {
                     "name": "FamAware",
-                    "content": [tables.create_breakdown_dcgstg3_dcgwhosmo_dcgsec2]
-                },
-                {
-                    "name": "ShopAskSuccess",
-                    "content": [tables.create_breakdown_sex_age1315_dcgstg3_dcgelbuy]
+                    "content": [tables.create_breakdown_dcgstg3_dcgsec2]
                 },
             ],
         },
@@ -362,18 +314,18 @@ def get_chapters():
                 {
                     "name": "FriendsFamilySmokev2",
                     "content": [tables.create_breakdown_age1115_dcgstg2_frfamsmoke]
-                },                
+                },
                 {
                     "name": "SmokingStatus",
-                    "content": [tables.create_breakdown_dcgwhosmo_dfasbands_imdquin_dcgstg3]
+                    "content": [tables.create_breakdown_dfasbands_imdquin_dcgstg3]
                 },
                 {
                     "name": "FamilyAttitude",
-                    "content": [tables.create_breakdown_sex_age1315_dcgstg3_dcgwhosmo_dcgfam]
+                    "content": [tables.create_breakdown_dgender_age1315_dcgstg3_dcgfam]
                 },
                 {
                     "name": "FamilyAttitudev2",
-                    "content": [tables.create_breakdown_sex_age1315_dcgstg2_dcgwhosmo_dcgfam]
+                    "content": [tables.create_breakdown_dgender_age1315_dcgstg2_dcgfam]
                 },
                 {
                     "name": "FamilyAttCurrent",
@@ -389,44 +341,12 @@ def get_chapters():
                 },
                 {
                     "name": "Attitudes",
-                    "content": [tables.create_breakdown_sex_age1115_dcgstg3_attitudes]
+                    "content": [tables.create_breakdown_dgender_age1115_dcgstg3_attitudes]
                 },
                 {
                     "name": "Attitudesv2",
-                    "content": [tables.create_breakdown_sex_age1115_dcgstg2_attitudes]
+                    "content": [tables.create_breakdown_dgender_age1115_dcgstg2_attitudes]
                 },
-                {
-                    "name": "Beliefs",
-                    "content": [tables.create_breakdown_sex_age1115_dcgstg3_beliefs]
-                },
-                {
-                    "name": "Beliefsv2",
-                    "content": [tables.create_breakdown_sex_age1115_dcgstg2_beliefs]
-                },
-                {
-                    "name": "Perceptions",
-                    "content": [tables.create_breakdown_sex_age1315_cgppfrsa_cgestim]
-                },
-                {
-                    "name": "Perceptions15",
-                    "content": [tables.create_breakdown_dcgstg3_cgestim]
-                },
-                {
-                    "name": "Perceptions15v2",
-                    "content": [tables.create_breakdown_dcgstg2_cgestim]
-                },
-                {
-                    "name": "SourceInfo",
-                    "content": [tables.create_breakdown_sex_age1115_dcgstg3_sources]
-                },
-                {
-                    "name": "SourceInfov2",
-                    "content": [tables.create_breakdown_sex_age1115_dcgstg2_sources]
-                },
-                {
-                    "name": "WhereDisplay",
-                    "content": [tables.create_breakdown_age1115_wheredisplay]
-                }
             ],
         },
         {
@@ -437,39 +357,27 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "Aware",
-                    "content": [tables.create_breakdown_sex_age1315_cgelechd]
+                    "content": [tables.create_breakdown_dgender_age1315_cgelechd]
                 },
                 {
                     "name": "Source",
-                    "content": [tables.create_breakdown_sex_age1315_ecig_sources]
+                    "content": [tables.create_breakdown_dgender_age1315_ecig_sources]
                 },
                 {
                     "name": "Status",
-                    "content": [tables.create_breakdown_sex_age1115_dcgstg5_dcgelec]
+                    "content": [tables.create_breakdown_dgender_age1115_region_dcgstg5_dcgelec]
                 },
                 {
                     "name": "Attitudes",
-                    "content": [tables.create_breakdown_sex_age1115_ecig_attitudes]
-                },
-                {
-                    "name": "AskBuy",
-                    "content": [tables.create_breakdown_sex_age1115_cgelshopp]
-                },
-                {
-                    "name": "AskBuyCurrent",
-                    "content": [tables.create_breakdown_dcgelec_cgelshopp]
-                },
-                {
-                    "name": "SucceedBuy",
-                    "content": [tables.create_breakdown_sex_age1215_cgelacbshp]
-                },
-                {
-                    "name": "SucceedBuyCurrent",
-                    "content": [tables.create_breakdown_dcgelec_cgelacbshp]
+                    "content": [tables.create_breakdown_dgender_age1115_ecig_attitudes]
                 },
                 {
                     "name": "RegLength",
-                    "content": [tables.create_breakdown_sex_cgellong]
+                    "content": [tables.create_breakdown_dgender_cgellong]
+                },
+                {
+                    "name": "RegSmoking",
+                    "content": [tables.create_breakdown_dgender_cgnbavap]
                 },
             ],
         },
@@ -481,43 +389,47 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "DrugUse",
-                    "content": [tables.create_breakdown_sex_age1115_region_ethnicgp5_druguse]
+                    "content": [tables.create_breakdown_dgender_age1115_region_ethnicgp5_druguse]
                 },
                 {
                     "name": "SummaryLastYr",
-                    "content": [tables.create_breakdown_sex_age1315_ddgyrty]
+                    "content": [tables.create_breakdown_dgender_age1315_ddgyrty]
                 },
                 {
                     "name": "Occasions",
-                    "content": [tables.create_breakdown_sex_age1115_ddgoc]
+                    "content": [tables.create_breakdown_dgender_age1115_ddgoc]
                 },
                 {
                     "name": "DrugUseType",
-                    "content": [tables.create_breakdown_sex_age1115_drugusetype]
+                    "content": [tables.create_breakdown_dgender_age1115_drugusetype]
                 },
                 {
                     "name": "OccasionsPsych",
-                    "content": [tables.create_breakdown_sex_age1315_dgocleg]
+                    "content": [tables.create_breakdown_dgender_age1315_dgocleg]
                 },
                 {
-                    "name": "OccasionsLastYr",
+                    "name": "OccasionslastYr",
                     "content": [tables.create_breakdown_age1315_ddgyrty5_ddgoc]
                 },
                 {
+                    "name": "OccasionsAllDrug",
+                    "content": [tables.create_breakdown_dgender_age1315_drugoccasion]
+                },
+                {
                     "name": "RecentPsych",
-                    "content": [tables.create_breakdown_sex_age1315_ddgtypleg]
+                    "content": [tables.create_breakdown_dgender_age1315_ddgtypleg]
                 },
                 {
                     "name": "OnceMonth",
-                    "content": [tables.create_breakdown_sex_age1215_ddgfq6]
+                    "content": [tables.create_breakdown_dgender_age1215_ddgfq6]
                 },
                 {
                     "name": "UsualFreq",
-                    "content": [tables.create_breakdown_sex_age1215_ddgfq8]
+                    "content": [tables.create_breakdown_dgender_age1215_ddgfq8]
                 },
                 {
                     "name": "UsualFreqLastYr",
-                    "content": [tables.create_breakdown_sex_age1315_ddgfq8_lastyr]
+                    "content": [tables.create_breakdown_dgender_age1315_ddgfq8_lastyr]
                 },
                 {
                     "name": "UsualFreqLastYrType",
@@ -533,11 +445,11 @@ def get_chapters():
                 },
                 {
                     "name": "Offered",
-                    "content": [tables.create_breakdown_sex_age1115_drugoff]
+                    "content": [tables.create_breakdown_dgender_age1115_drugoff]
                 },
                 {
                     "name": "Offered15Any",
-                    "content": [tables.create_breakdown_sex_age15_anydrugofftaken]
+                    "content": [tables.create_breakdown_dgender_age15_anydrugofftaken]
                 },
                 {
                     "name": "Aware",
@@ -545,11 +457,11 @@ def get_chapters():
                 },
                 {
                     "name": "Offered15Can",
-                    "content": [tables.create_breakdown_sex_age15_canofftaken]
+                    "content": [tables.create_breakdown_dgender_age15_canofftaken]
                 },
                 {
                     "name": "Offered15ClassA",
-                    "content": [tables.create_breakdown_sex_age15_claofftaken]
+                    "content": [tables.create_breakdown_dgender_age15_claofftaken]
                 },
                 {
                     "name": "AgeFirstDrug",
@@ -565,7 +477,7 @@ def get_chapters():
                 },
                 {
                     "name": "DrugRecent",
-                    "content": [tables.create_breakdown_sex_age1315_ddglttyp]
+                    "content": [tables.create_breakdown_dgender_age1315_ddglttyp]
                 },
             ],
         },
@@ -577,19 +489,19 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "FromFirstTime",
-                    "content": [tables.create_breakdown_sex_ddgageany11_ddgfttyp_dgftwh]
+                    "content": [tables.create_breakdown_dgender_ddgageany11_ddgfttyp_dgftwh]
                 },
                 {
                     "name": "FromMostRecent",
-                    "content": [tables.create_breakdown_sex_age1315_ddglttyp_dgltwh]
+                    "content": [tables.create_breakdown_dgender_age1315_ddglttyp_dgltwh]
                 },
                 {
                     "name": "EaseObtain",
-                    "content": [tables.create_breakdown_sex_age_ddgofany_dgget]
+                    "content": [tables.create_breakdown_dgender_age_ddgofany_ddgget]
                 },
                 {
                     "name": "IntShop",
-                    "content": [tables.create_breakdown_sex_age1115_dgbuy]
+                    "content": [tables.create_breakdown_dgender_age1115_dgbuy]
                 },
                 {
                     "name": "IntShopLastYr",
@@ -597,11 +509,11 @@ def get_chapters():
                 },
                 {
                     "name": "WhereObtain",
-                    "content": [tables.create_breakdown_sex_age1315_ddglttyp_dgltwhr]
+                    "content": [tables.create_breakdown_dgender_age1315_ddglttyp_dgltwhr]
                 },
                 {
                     "name": "WhoWith",
-                    "content": [tables.create_breakdown_sex_age1315_ddglttyp_whowith]
+                    "content": [tables.create_breakdown_dgender_age1315_ddglttyp_whowith]
                 },
             ],
         },
@@ -613,23 +525,19 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "WhyFirst",
-                    "content": [tables.create_breakdown_sex_ddgageany11_ddgfttyp_ddgftwy]
+                    "content": [tables.create_breakdown_dgender_ddgageany11_ddgfttyp_ddgftwy]
                 },
                 {
                     "name": "WhyRecent",
-                    "content": [tables.create_breakdown_sex_age1315_ddglttyp_ddgoc_ddgltwy]
+                    "content": [tables.create_breakdown_dgender_age1315_ddglttyp_ddgoc_ddgltwy]
                 },
                 {
                     "name": "Attitudes",
-                    "content": [tables.create_breakdown_sex_age1115_drugattitudes]
-                },
-                {
-                    "name": "Perceptions",
-                    "content": [tables.create_breakdown_sex_age1115_ddgoc4_dgestim]
+                    "content": [tables.create_breakdown_dgender_age1115_drugattitudes]
                 },
                 {
                     "name": "FamAttitude",
-                    "content": [tables.create_breakdown_sex_age1115_ddgfam]
+                    "content": [tables.create_breakdown_dgender_age1115_ddgfam]
                 },
                 {
                     "name": "FamAttitudeKnow",
@@ -637,12 +545,8 @@ def get_chapters():
                 },
                 {
                     "name": "Occasions",
-                    "content": [tables.create_breakdown_ddgfam4_ddgoc]
+                    "content": [tables.create_breakdown_ddgfam5_ddgoc]
                 },
-                {
-                    "name": "Sources",
-                    "content": [tables.create_breakdown_sex_age1115_ddglast3_sources]
-                 },
                 {
                     "name": "LastTaken",
                     "content": [tables.create_breakdown_dfasbands_imdquin_ddglast3]
@@ -681,7 +585,7 @@ def get_chapters():
             "sheets": [
                 {
                     "name": "LifeSat",
-                    "content": [tables.create_breakdown_sex_age1115_region_dlifsat]
+                    "content": [tables.create_breakdown_dgender_age1115_region_dlifsat]
                  },
                 {
                     "name": "LifeSatBehaviour",
@@ -689,7 +593,7 @@ def get_chapters():
                  },
                 {
                     "name": "LifeWorth",
-                    "content": [tables.create_breakdown_sex_age1115_region_dlifwor]
+                    "content": [tables.create_breakdown_dgender_age1115_region_dlifwor]
                  },
                 {
                     "name": "LifeWorthBehaviour",
@@ -697,7 +601,7 @@ def get_chapters():
                  },
                 {
                     "name": "LifeHappy",
-                    "content": [tables.create_breakdown_sex_age1115_region_dlifhap]
+                    "content": [tables.create_breakdown_dgender_age1115_region_dlifhap]
                  },
                 {
                     "name": "LifeHappyBehaviour",
@@ -705,7 +609,7 @@ def get_chapters():
                  },
                 {
                     "name": "LifeAnxious",
-                    "content": [tables.create_breakdown_sex_age1115_region_dlifanx]
+                    "content": [tables.create_breakdown_dgender_age1115_region_dlifanx]
                  },
                 {
                     "name": "LifeAnxiousBehaviour",
@@ -713,151 +617,35 @@ def get_chapters():
                  },
                 {
                     "name": "LifeLow",
-                    "content": [tables.create_breakdown_sex_age1115_dliflow]
-                 },
-            ],
-        },
-        {
-            "output_path": param.OUTPUT_DIR / "MasterFiles" / "sdd_covidimpact_source.xlsx",
-            "table_path": param.OUTPUT_DIR / "MasterFiles" / "sdd_covidimpact_datatables_master.xlsx",
-            "run_chapter": param.CHAPTER_COVID_IMPACT,
-            "chapter_number": "14",
-            "sheets": [
-                {
-                    "name": "SmokingStatus",
-                    "content": [tables.create_breakdown_sex_schlearn_dcgstg5]
+                    "content": [tables.create_breakdown_dgender_age1115_dliflow]
                  },
                 {
-                    "name": "SmokedLastWk",
-                    "content": [tables.create_breakdown_sex_dmet7dysg_cg7]
+                    "name": "LonelyComp",
+                    "content": [tables.create_breakdown_dgender_age1115_region_dloncomp]
                  },
                 {
-                    "name": "CigsSmoked",
-                    "content": [tables.create_breakdown_dmet7dysg_dcg7totg]
+                    "name": "LonelyCompBehaviour",
+                    "content": [tables.create_breakdown_cg7_dallast5_ddgmonany_dmulticount_dloncomp]
                  },
                 {
-                    "name": "ECigStatus",
-                    "content": [tables.create_breakdown_sex_schlearn_dcgelec]
+                    "name": "Lonely",
+                    "content": [tables.create_breakdown_dgender_age1115_region_lonlonely]
                  },
                 {
-                    "name": "LastDrank",
-                    "content": [tables.create_breakdown_sex_schlearn_dallast3]
+                    "name": "LonelyBehaviour",
+                    "content": [tables.create_breakdown_cg7_dallast5_ddgmonany_dmulticount_lonlonely]
                  },
                 {
-                    "name": "UnitsDrunk",
-                    "content": [tables.create_breakdown_dmet7dysg_nal7utg7]
+                    "name": "LonelyTalkTo",
+                    "content": [tables.create_breakdown_dgender_age1115_lontalk]
                  },
                 {
-                    "name": "DrinkFreq",
-                    "content": [tables.create_breakdown_sex_met4wks_schlearn_dalfrq7]
+                    "name": "LonelyLeftOut",
+                    "content": [tables.create_breakdown_dgender_age1115_lonout]
                  },
                 {
-                    "name": "Drunk4wks",
-                    "content": [tables.create_breakdown_sex_met4wks_dal4dru5]
-                 },
-                {
-                    "name": "DrugUse",
-                    "content": [tables.create_breakdown_sex_met4wks_schlearn_druguse]
-                 },
-                {
-                    "name": "DrugFreq",
-                    "content": [tables.create_breakdown_sex_schlearn_ddgfq8_lastyr]
-                 },
-                {
-                    "name": "RecentBehav",
-                    "content": [tables.create_breakdown_sex_met4wks_behavrec]
-                 },
-                {
-                    "name": "LifeBehav",
-                    "content": [tables.create_breakdown_sex_schlearn_lifebehav]
-                 },
-                {
-                    "name": "DrugsLastMth",
-                    "content": [tables.create_breakdown_sex_schlearn_met4wks_drugslastmth]
-                 },
-                {
-                    "name": "Overlapping",
-                    "content": [tables.create_breakdown_met4wks_behavoverlap]
-                 },
-                {
-                    "name": "LifeSat",
-                    "content": [tables.create_breakdown_met4wks_dlifsat]
-                 },
-                {
-                    "name": "LifeWorth",
-                    "content": [tables.create_breakdown_met4wks_dlifwor]
-                 },
-                {
-                    "name": "LifeHappy",
-                    "content": [tables.create_breakdown_met4wks_dlifhap]
-                 },
-                {
-                    "name": "LifeAnxious",
-                    "content": [tables.create_breakdown_met4wks_dlifanx]
-                 },
-                {
-                    "name": "LifeSatLastWk",
-                    "content": [tables.create_breakdown_dmet7dysg_dlifsat]
-                 },
-                {
-                    "name": "LifeWorthLastWk",
-                    "content": [tables.create_breakdown_dmet7dysg_dlifwor]
-                 },
-                {
-                    "name": "LifeHappyLastWk",
-                    "content": [tables.create_breakdown_dmet7dysg_dlifhap]
-                 },
-                {
-                    "name": "LifeAnxiousLastWk",
-                    "content": [tables.create_breakdown_dmet7dysg_dlifanx]
-                 },
-            ],
-        },
-        {
-            "output_path": param.OUTPUT_DIR / "MasterFiles" / "sdd_surveydelivery_source.xlsx",
-            "table_path": param.OUTPUT_DIR / "MasterFiles" / "sdd_surveydelivery_datatables_master.xlsx",
-            "run_chapter": param.CHAPTER_SURVEY_DELIVERY,
-            "chapter_number": "15",
-            "sheets": [
-                {
-                    "name": "SmokingStatus",
-                    "content": [tables.create_breakdown_sex_appointflag_dcgstg5]
-                 },
-                {
-                    "name": "SmokedLastWk",
-                    "content": [tables.create_breakdown_sex_appointflag_cg7]
-                 },
-                {
-                    "name": "CigsSmoked",
-                    "content": [tables.create_breakdown_appointflag_dcg7totg]
-                 },
-                {
-                    "name": "ECigStatus",
-                    "content": [tables.create_breakdown_sex_appointflag_dcgelec]
-                 },
-                {
-                    "name": "LastDrank",
-                    "content": [tables.create_breakdown_sex_appointflag_dallast3]
-                 },
-                {
-                    "name": "UnitsDrunk",
-                    "content": [tables.create_breakdown_appointflag_nal7utg7]
-                 },
-                {
-                    "name": "DrinkFreq",
-                    "content": [tables.create_breakdown_sex_appointflag_dalfrq7]
-                 },
-                {
-                    "name": "DrugFreq",
-                    "content": [tables.create_breakdown_sex_appointflag_ddgfq8_lastyr]
-                 },
-                {
-                    "name": "LastTookDrugs",
-                    "content": [tables.create_breakdown_sex_appointflag_ddglast3]
-                 },
-                {
-                    "name": "DrugsLastmth",
-                    "content": [tables.create_breakdown_sex_appointflag_drugslastmth]
+                    "name": "LonelyAlone",
+                    "content": [tables.create_breakdown_dgender_age1115_lonalone]
                  },
             ],
         },

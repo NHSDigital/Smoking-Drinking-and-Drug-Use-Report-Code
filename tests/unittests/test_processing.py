@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import numpy as np
-from sdd_code.utilities import processing
+from sdd_code.utilities.processing import processing
 from sdd_code.utilities import parameters as param
 from sdd_code.utilities.parameters import TOT_CODE as T
 

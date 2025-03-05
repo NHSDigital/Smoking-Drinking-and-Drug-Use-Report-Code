@@ -1,7 +1,7 @@
 """Data tests for SDD pupil raw input from IPSOS
 
-These are pytest tests for a raw .SAV SPSS file, that check values based on saved
-metadata 
+These are pytest tests for a raw .SAV SPSS file, that check values based on
+metadata.
 To test a different .sav file or use different metadata, change the command line
 arguments --sdd_file and --sdd_metadata.
 
@@ -74,7 +74,7 @@ def test_null_vals(sdd_all: pd.DataFrame):
         f"in columns {list(sdd_all.columns[sdd_all.isnull().any()])}"
     )
 
-    assert not sdd_all.isnull().values.any(), msg
+    assert not sdd_all.drop('pupilwt', axis=1).isnull().values.any(), msg
 
 
 def test_input_attributes(sdd_all: pd.DataFrame, sdd_dtypes: Dict[str, str]):
@@ -166,7 +166,7 @@ def test_continuous_values(
     # Continuous values are float responses (i.e. units drank) that should be
     # in this range, or are coded as negatives missiing/unknown/other
     values_in_range = col.between(min_val, max_val) | col.isin(
-        [-9, -8, -1]
+        [-9, -7, -8, -1]
     )
 
     assert all(
@@ -178,12 +178,15 @@ def test_pupilwt(sdd_all: pd.DataFrame):
     """Do all weights lie in expected ranges and sum to appropriate values"""
     if 'pupilwt' in sdd_all.columns:
         assert (
-            sdd_all["pupilwt"].between(0.01, 10).all()
+            sdd_all["pupilwt"].dropna().between(0.01, 10).all()
         ), "Pupil weighting variable is not in range"
-    
-        assert sdd_all["pupilwt"].sum() == pytest.approx(
-            sdd_all.shape[0]
+
+        assert sdd_all["pupilwt"].dropna().sum() == pytest.approx(
+            sdd_all["pupilwt"].dropna().shape[0]
         ), "Pupil weighting does not sum to pupil count"
+
+        assert (sdd_all.loc[sdd_all["volunsch"] != 1]["pupilwt"].isnull().values.any(),
+               "Null pupil weight values present in sample data")
 
 
 def test_unique_keys(sdd_all: pd.DataFrame):

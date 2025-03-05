@@ -1,42 +1,39 @@
-Warning - this repository is a snapshot of a repository internal to NHS Digital. This means that links to videos and some URLs may not work.***
+Warning - this repository is a snapshot of a repository internal to NHS England.
+This means that links to videos and some URLs may not work.***
 
-***Repository owner: Analytical Services: Population Health, Clinical Audit and Specialist Care***
+Repository owner: Clinical Outcomes and Indicators team, NHS England
 
-***Email: lifestyles@nhs.net***
+Email: lifestyles@nhs.net
 
-***To contact us raise an issue on Github or via email and we will respond promptly.***
+To contact us raise an issue on Github or via email and we will respond promptly.
 
 # Smoking, drinking and drug use amongst young people (SDD) survey background
 
-This repository contains the code used by NHS England to create publication outputs from the 2021 SDD survey. 
+This repository contains the code used by NHS England to create publication outputs from the 2023 SDD survey.
 
-***Results from the 2023 survey were published on 17th October 2024.
-The updated version of the repository used to create the 2023 outputs will be published to GitHub later in 2024.***
-
-The SDD dataset contains results from a biennial survey of secondary school pupils 
+The SDD dataset contains results from a biennial survey of secondary school pupils
 in England in years 7 to 11 (mostly aged 11 to 15), focusing on smoking, drinking
-and drug use. It covers a range of topics including prevalence, habits, attitudes, 
+and drug use. It covers a range of topics including prevalence, habits, attitudes,
 and wellbeing.
 
-The dataset is compiled by IPSOS MORI and provided as 2 SPSS (.sav) files: one pupil
+The dataset is compiled by IPSOS UK and provided as 2 SPSS (.sav) files: one pupil
 file containing pupil details and question responses, and one school file containing
 teacher responses.
 
-This project produces the required publication outputs: Data tables, charts, raw
-data file for the UK data archive.
+This project produces the required publication outputs: Data tables, charts and
+statistical analyses.
 
 # Getting Started
 
 ## Clone repository
-To clone respositary, please see our [community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/development-approach/02_using-git-collaboratively.md).
+To clone respositary, please see our [community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/docs/training_resources/git/using-git-collaboratively.md).
 
 ## Set up environment
 There are two options to set up the python enviroment:
 1. Pip using `requirements.txt`.
 2. Conda using `environment.yml`.
 
-Users would need to delete as appropriate which set they do not need. For details, please see our [virtual environments in the community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/python/virtual-environments.md).
-
+Users would need to delete as appropriate which set they do not need. For details, please see our [virtual environments in the community of practice page](https://github.com/NHSDigital/rap-community-of-practice/blob/main/docs/training_resources/python/virtual-environments/venv.md).
 
 Run the following command in Terminal or VScode to set up the packages:
 ```
@@ -55,7 +52,7 @@ smoking-drinking-and-drug-use-rap
 │   .gitignore                              - Used to prevent files from being committed to this repo
 │   conftest.py                             - Defines custom functions used when testing the code
 │   environment.yml                         - Used to install the conda environment
-│   LICENSE
+│   LICENCE
 │   pytest.ini                              - Defines the default options when running pytest
 │   README.md
 │   requirements.txt                        - Used to install the python dependencies
@@ -71,14 +68,20 @@ smoking-drinking-and-drug-use-rap
 │   ├───sddR                                - Contains all the R code used in the package, see the README within for details
 │   │
 │   ├───utilities                           - This module contains all the main modules used to create the publication
+│   │   ├───field_definitions
+│   │   │       derivations.py              - Contains every derived field in the publication as a function
+│   │   │       exclusion_flags.py          - Contains every exclusion field used to filter the data
+│   │   │
+│   │   ├───processing                      - Contains the main functions code used to manipulate data and produce outputs
+│   │   │       processing.py               - Defines the main functions used to manipulate data and produce outputs
+│   │   │       processing_exclusions.py    - Defines the main functions used to filter out data using the exclusion flags
+│   │   │
 │   │   │   chapters.py                     - Defines the output excel files, which tables are in each and their names
 │   │   │   data_import.py                  - Contains functions for reading in the .SAV files
-│   │   │   derivations.py                  - Contains every derived field in the publication as a function
 │   │   │   difference.py                   - Contains functions used to check the difference between tables
 │   │   │   logger_config.py                - The configuration functions for the publication logger
 │   │   │   metadata.py                     - Functions used to save and manipulate the metadata of the .SAV files
-│   │   │   parameters.py                   - Contains parameters that define the how the publication will run
-│   │   │   processing.py                   - Defines the main functions used to manipulate data and produce outputs
+│   │   │   parameters.py                   - Contains parameters that define the how the publication will run                  
 │   │   │   publication.py                  - Contains functions used to create publication ready outputs
 │   │   │   stats.py                        - Contains the Python statistical functions
 │   │   │   stats_R.py                      - Contains the Python functions that call R statistical functions
@@ -134,18 +137,24 @@ for details of that process).
 The publication process is run using the top-level script, create_publication.py. 
 This script imports and runs all the required functions and from the sub-modules.
 
-The models are ran using the top level script create_models.py, which uses R and rpy2 to create the models in Python. For more info, check the [README](sdd_code/models/README.md).
+The models are ran using the top level script create_models.py, which uses R and rpy2 to create the models in Python. For more info, check the [README](sdd_code\models\README.md).
 
 # Link to the publication
 https://digital.nhs.uk/data-and-information/publications/statistical/smoking-drinking-and-drug-use-among-young-people-in-england
 
-# License
-The SDD publication codebase is released under the MIT License.
+# Authors and acknowledgment
 
-Copyright © 2022, Health and Social Care Information Centre. The Health and Social Care Information Centre is a non-departmental body created by statute, also known as NHS Digital.
+Clinical Outcomes and Indicators Team, NHS England lifestyles@nhs.net
+
+# License
+The Smoking, drinking and drug use among young people publication codebase is released
+under the MIT License. The documentation is © Crown copyright and available under the
+terms of the Open Government 3.0 licence.
 ________________________________________
-You may re-use this document/publication (not including logos) free of charge in any format or medium, under the terms of the Open Government Licence v3.0.
+You may re-use this document/publication (not including logos) free of charge in any
+format or medium, under the terms of the Open Government Licence v3.0.
 Information Policy Team, The National Archives, Kew, Richmond, Surrey, TW9 4DU;
 email: psi@nationalarchives.gsi.gov.uk
+
 
 
