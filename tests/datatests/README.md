@@ -3,16 +3,16 @@ This file describes the design and usage of the input data tests for SDD. For an
 [[_TOC_]]
 
 # What Are They For
-These tests, defined in [test_ipsos_raw_input_pupil.py](test_ipsos_raw_input_pupil.py) and [test_ipsos_raw_input_teacher.py](test_ipsos_raw_input_teacher.py), confirm that a raw SPSS file (i.e. ending with the `.sav` extension) conforms to the properties defined in the SDD metadata.
+These tests, defined in [test_ipsos_raw_input_pupil.py](test_ipsos_raw_input_pupil.py) and [test_ipsos_raw_input_teacher.py](test_ipsos_raw_input_teacher.py), confirm that a raw SPSS file (i.e. ending with the `.sav` extension) conforms to the properties defined in the SDD metadata 
 
 # How Do They Work
-The tests are written using pytest, a Python testing framework - see [here](https://nhsd-git.digital.nhs.uk/data-services/analytics-service/iuod/rap-community-of-practice/-/blob/master/development-approach/05_unit-tests.md) for the NHSD RAP guide. Pytest tests are traditionally written to test code, but can be used to test any set of assumptions that you can define. These work by reading in the metadata files - see [Updating Metadata](#updating-metadata) for detailed info on each of the files - and using the information stored within to check the input `.sav` file.
+The tests are written using pytest, a Python testing framework - see [here](https://github.com/NHSDigital/rap-community-of-practice/blob/main/docs/training_resources/python/unit-testing-field-definitions.md) for the NHSD RAP guide. Pytest tests are traditionally written to test code, but can be used to test any set of assumptions that you can define. These work by reading in the metadata files - see [Updating Metadata](#updating-metadata) for detailed info on each of the files - and using the information stored within to check the input `.sav` file.
 
 The steps within each are very similar, and so for brevity this file will describe the steps in the Pupil test file.
 
 The first step in [test_ipsos_raw_input_pupil.py](test_ipsos_raw_input_pupil.py) is to read in the SPSS `.sav` file specified, it does this using the `import_sav_values` function defined in [data_import.py](/sdd_code/utilities/data_import.py), dropping the columns specified in [parameters.py](/sdd_code/utilities/parameters.py), and attempting to coerce the data types to expected Pandas ones using `convert_sdd_dtypes` from [metadata.py](/sdd_code/utilities/metadata.py). Next the metadata is loaded, as a Python dictionary for each file. The metadata and SPSS file are read-in as session scoped pytest [fixtures](https://docs.pytest.org/en/6.2.x/fixture.html), to enable them to be parsed once and passed to the tests.
 
-The results of these tests will be saved to a HTML report, in the location specified in parameters.REPORT_DIR.
+The results of these tests will be saved to a HTML report, in the location specified in `parameters.REPORT_DIR`.
 
 Once all the data and metadata is loaded, the tests are ran:
 
@@ -50,7 +50,8 @@ When running these tests on a new SDD `.sav` file, the metadata and underlying t
 
 ## Updating Metadata
 
-The metadata for each of the Pupil data and teacher data for SDD is stored in sdd_metadata.json
+The metadata for each of the Pupil data and teacher data for SDD is stored in 2 files. These are:
+- `sdd_metadata.json`
 
 These are `.json` files, for our purposes they can be interpreted as a Python [dictionary](https://docs.python.org/3/tutorial/datastructures.html) - which are maps from "keys" to "values".
 

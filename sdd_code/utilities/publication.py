@@ -99,7 +99,7 @@ def remove_temp_cols_and_rows(
     Temp_Col: Will remove that column
     Temp_Row: Will removed that row
     Temp_Row_Col: Will removed both the row and the column
-    The process is set to check columns A to C,,and row 1 for these flags, which is the
+    The process is set to check columns A to C ,and row 1 for these flags, which is the
     extent of the current look up values. If lookup values are added to further
     columns then these will need adding to col_range and row_range
 

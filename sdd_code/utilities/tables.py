@@ -1,8 +1,8 @@
-from sdd_code.utilities.processing import create_breakdown_single
-from sdd_code.utilities.processing import create_breakdown_single_combine
-from sdd_code.utilities.processing import create_breakdown_multiple_discrete
-from sdd_code.utilities.processing import create_breakdown_multiple_cont
-from sdd_code.utilities.processing import create_breakdown_statistics
+from sdd_code.utilities.processing.processing import create_breakdown_single
+from sdd_code.utilities.processing.processing import create_breakdown_single_combine
+from sdd_code.utilities.processing.processing import create_breakdown_multiple_discrete
+from sdd_code.utilities.processing.processing import create_breakdown_multiple_cont
+from sdd_code.utilities.processing.processing import create_breakdown_statistics
 
 
 """
@@ -24,7 +24,7 @@ Parameters:
     questions: list[str]
         One or more variable names that defines the question(s) in the survey
         (e.g. dallast5, alevr)
-        Used when compiling the statistics outputs that anlayse multiple questions
+        Used when compiling the statistics outputs that analyse multiple questions
     filter_condition: str
         this is an non-standard, optional dataframe filter needed for some tables.
         Default is None.
@@ -46,7 +46,7 @@ Parameters:
     responses: list[str]
         Multi response tables only
         List of variables that represent all the response options to the question.
-        In these cases a new single varibale will be created that holds
+        In these cases a new single variable will be created that holds
         these multiple responses (named as per the question parameter - see above)
 
 Returns:
@@ -57,8 +57,8 @@ Returns:
 # Drinking prevalence tables begin here
 
 
-def create_breakdown_sex_age1115_region_ethnicgp5_alevr(df):
-    breakdowns = ["sex", "age1115", "region", "ethnicgp5"]
+def create_breakdown_dgender_age1115_region_ethnicgp5_alevr(df):
+    breakdowns = ["dgender", "age1115", "region", "ethnicgp5"]
     question = "alevr"
     filter_condition = None
     subgroup = None
@@ -67,8 +67,8 @@ def create_breakdown_sex_age1115_region_ethnicgp5_alevr(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_region_ethnicgp5_dallast5(df):
-    breakdowns = ["sex", "age1115", "region", "ethnicgp5"]
+def create_breakdown_dgender_age1115_region_ethnicgp5_dallast5(df):
+    breakdowns = ["dgender", "age1115", "region", "ethnicgp5"]
     question = "dallast5"
     filter_condition = None
     subgroup = None
@@ -77,20 +77,20 @@ def create_breakdown_sex_age1115_region_ethnicgp5_dallast5(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1315_daysdrank(df):
-    breakdowns = ["sex", "age1315"]
+def create_breakdown_dgender_age1315_daysdrank(df):
+    breakdowns = ["dgender", "age1315"]
     responses = ["al7dmon", "al7dtue", "al7dwed", "al7dthu",
                  "al7dfri", "al7dsat", "al7dsun"]
     question = "daysdrank"
-    bases = ["al7day"]
+    bases = ["dal7day"]
     filter_condition = None
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1315_nal7utg7(df):
-    breakdowns = ["sex", "age1315"]
+def create_breakdown_dgender_age1315_nal7utg7(df):
+    breakdowns = ["dgender", "age1315"]
     question = "nal7utg7"
     filter_condition = "dallast5 == 1"
     subgroup = None
@@ -99,8 +99,8 @@ def create_breakdown_sex_age1315_nal7utg7(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_dalfrq7(df):
-    breakdowns = ["sex", "age1115"]
+def create_breakdown_dgender_age1115_dalfrq7(df):
+    breakdowns = ["dgender", "age1115"]
     question = "dalfrq7"
     filter_condition = None
     subgroup = {10: [1, 2, 3]}
@@ -109,8 +109,8 @@ def create_breakdown_sex_age1115_dalfrq7(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_daldrunk(df):
-    breakdowns = ['sex', 'age1115']
+def create_breakdown_dgender_age1115_daldrunk(df):
+    breakdowns = ['dgender', 'age1115']
     question = 'daldrunk'
     filter_condition = None
     subgroup = None
@@ -119,10 +119,10 @@ def create_breakdown_sex_age1115_daldrunk(df):
                                    subgroup)
 
 
-def create_breakdown_stats_sex_age1315_nal7(df):
+def create_breakdown_stats_dgender_age1315_nal7(df):
 
-    breakdowns = ["sex", "age1315"]
-    questions = ["nal7ut", "nal7br", "nal7pp", "nal7sd", "nal7sp",
+    breakdowns = ["dgender", "age1315"]
+    questions = ["nal7ut", "nal7br", "nal7cd", "nal7pp", "nal7sp",
                  "nal7winsh"]
     base = "nal7ut"
     filter_condition = "dallast5 == 1"
@@ -131,19 +131,19 @@ def create_breakdown_stats_sex_age1315_nal7(df):
                                        filter_condition)
 
 
-def create_breakdown_stats_sex_age1315_al7(df):
+def create_breakdown_stats_dgender_age1315_al7(df):
 
-    breakdowns = ["sex", "age1315"]
-    questions = ["al7day"]
-    base = "al7day"
+    breakdowns = ["dgender", "age1315"]
+    questions = ["dal7day"]
+    base = "dal7day"
     filter_condition = None
 
     return create_breakdown_statistics(df, breakdowns, questions, base,
                                        filter_condition)
 
 
-def create_breakdown_sex_dagedrank(df):
-    breakdowns = ["sex"]
+def create_breakdown_dgender_dagedrank(df):
+    breakdowns = ["dgender"]
     question = "dagedrank"
     filter_condition = "(alevr == 1)  & (age1115 == 15)"
     subgroup = None
@@ -152,8 +152,8 @@ def create_breakdown_sex_dagedrank(df):
                                    subgroup)
 
 
-def create_breakdown_sex_dalagedru(df):
-    breakdowns = ["sex"]
+def create_breakdown_dgender_dalagedru(df):
+    breakdowns = ["dgender"]
     question = "dalagedru"
     filter_condition = "(age1115 == 15) & (alevrdnk == 1)"
     subgroup = None
@@ -162,8 +162,8 @@ def create_breakdown_sex_dalagedru(df):
                                    filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1115_dal4dru5(df):
-    breakdowns = ["sex", "age1115"]
+def create_breakdown_dgender_age1115_dal4dru5(df):
+    breakdowns = ["dgender", "age1115"]
     question = "dal4dru5"
     filter_condition = None
     subgroup = {10: [2, 3, 6]}
@@ -172,10 +172,9 @@ def create_breakdown_sex_age1115_dal4dru5(df):
                                    subgroup)
 
 
-def create_breakdown_sex_typedrank(df):
-    breakdowns = ["sex"]
-    responses = ["nal7br", "nal7sd", "nal7pp", "nal7sp",
-                 "nal7winsh"]
+def create_breakdown_dgender_typedrank(df):
+    breakdowns = ["dgender"]
+    responses = ["nal7br", "nal7cd", "nal7pp", "nal7sp", "nal7winsh"]
     question = "typedrank"
     base = "nal7ut"
     filter_condition = "dallast5 == 1"
@@ -184,9 +183,9 @@ def create_breakdown_sex_typedrank(df):
                                           question, base, filter_condition)
 
 
-def create_breakdown_sex_age1315_al7day(df):
-    breakdowns = ["sex", "age1315"]
-    question = "al7day"
+def create_breakdown_dgender_age1315_dal7day(df):
+    breakdowns = ["dgender", "age1315"]
+    question = "dal7day"
     filter_condition = None
     subgroup = None
 
@@ -194,10 +193,10 @@ def create_breakdown_sex_age1315_al7day(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1315_dal7(df):
+def create_breakdown_dgender_age1315_dal7(df):
 
-    breakdowns = ["sex", "age1315"]
-    responses = ["dal7beer", "dal7shan", "dal7winsh", "dal7spir", "dal7pops",
+    breakdowns = ["dgender", "age1315"]
+    responses = ["dal7beerlg", "dal7cidn", "dal7winsh", "dal7spir", "dal7pops",
                  "dal7any"]
     question = "typedrank"
     bases = responses
@@ -207,8 +206,8 @@ def create_breakdown_sex_age1315_dal7(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1315_dalunitsday(df):
-    breakdowns = ["sex", "age1315"]
+def create_breakdown_dgender_age1315_dalunitsday(df):
+    breakdowns = ["dgender", "age1315"]
     question = "dalunitsday"
     filter_condition = "dallast5 == 1"
     subgroup = None
@@ -219,8 +218,8 @@ def create_breakdown_sex_age1315_dalunitsday(df):
 
 # Pupils who drink tables begin here
 
-def create_breakdown_sex_age1315_dal4dru5(df):
-    breakdowns = ["sex", "age1315"]
+def create_breakdown_dgender_age1315_dal4dru5(df):
+    breakdowns = ["dgender", "age1315"]
     question = "dal4dru5"
     filter_condition = "dal4dru5 != 5"
     subgroup = {7: [2, 3, 6]}
@@ -229,37 +228,37 @@ def create_breakdown_sex_age1315_dal4dru5(df):
                                    subgroup)
 
 
-def create_breakdown_alcohol_howobtain(df):
+def create_breakdown_alcohol_howobtain_all(df):
 
-    breakdowns = ["sex", "age1215", "nal7utg4"]
-    responses = ["altryels", "dalshop4", "dalpub4", "algivpar", "algivfre",
+    breakdowns = ["dgender", "age1215", "nal7utg4"]
+    responses = ["dalshop4", "dalpub4", "algivpar", "algivfre",
                  "algivrel", "algivsib", "algivoth", "altakhom", "altakfre",
                  "alstlhom", "alstlfre", "alstloth", "dalgot4"]
     question = "howobtain"
     bases = responses
-    filter_condition = None
+    filter_condition = "alevr in [1, -7]"
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1215_nal7ut_howobtain(df):
+def create_breakdown_alcohol_howobtain(df):
 
-    breakdowns = ["sex", "age1215", "nal7utg4"]
-    responses = ["altryels", "dalshop4", "dalpub4", "algivpar", "algivfre",
+    breakdowns = ["dgender", "age1215", "nal7utg4"]
+    responses = ["dalshop4evr", "dalpub4evr", "algivpar", "algivfre",
                  "algivrel", "algivsib", "algivoth", "altakhom", "altakfre",
-                 "alstlhom", "alstlfre", "alstloth"]
+                 "alstlhom", "alstlfre", "alstloth", "dalgot4evr"]
     question = "howobtain"
     bases = responses
-    filter_condition = "dalgot4 == 1"
+    filter_condition = "dalgot4evr == 1"
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1215_nal7ut_wherebuy(df):
+def create_breakdown_dgender_age1215_nal7ut_wherebuy(df):
 
-    breakdowns = ["sex", "age1215", "nal7utg4"]
+    breakdowns = ["dgender", "age1215", "nal7utg4"]
     responses = ["albuyels", "albuyfre", "albuygar", "albuyoff", "albuypub",
                  "albuyshp", "albuystr", "albuyclu", "dalbuyper", "dalbuyret",
                  "albuynev"]
@@ -271,9 +270,9 @@ def create_breakdown_sex_age1215_nal7ut_wherebuy(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1215_nal7ut_wheredrink(df):
+def create_breakdown_dgender_age1215_nal7ut_wheredrink(df):
 
-    breakdowns = ["sex", "age1215", "nal7utg4"]
+    breakdowns = ["dgender", "age1215", "nal7utg4"]
     responses = ["alushom", "alusohm", "dalushmo", "alusclu", "alusfre",
                  "aluspub", "alusstr", "alusels"]
     question = "wheredrink"
@@ -284,8 +283,8 @@ def create_breakdown_sex_age1215_nal7ut_wheredrink(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1315_al4wdedr(df):
-    breakdowns = ["sex", "age1315"]
+def create_breakdown_dgender_age1315_al4wdedr(df):
+    breakdowns = ["dgender", "age1315"]
     question = "al4wdedr"
     filter_condition = "(al4wdru == 1) & (al4wfrq > -1)"
     subgroup = None
@@ -294,11 +293,11 @@ def create_breakdown_sex_age1315_al4wdedr(df):
                                    subgroup)
 
 
-def create_breakdown_sex_dal4dru5_drunkadverse(df):
+def create_breakdown_dgender_dal4dru5_drunkadverse(df):
 
-    breakdowns = ["sex", "dal4dru5"]
-    responses = ["al4warg", "al4wdam", "al4wfig", "al4whos", "al4will",
-                 "al4wlst", "al4wpol", "al4wvom"]
+    breakdowns = ["dgender", "dal4dru5"]
+    responses = ["dal4warg", "dal4wdam", "dal4wfig", "dal4whos", "dal4will",
+                 "dal4wlst", "dal4wpol", "dal4wvom"]
     question = "drunkadverse"
     bases = responses
     filter_condition = "dal4dru5 in [2, 3]"
@@ -307,9 +306,9 @@ def create_breakdown_sex_dal4dru5_drunkadverse(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1215_nal7ut_whodrink(df):
+def create_breakdown_dgender_age1215_nal7ut_whodrink(df):
 
-    breakdowns = ["sex", "age1215", "nal7utg4"]
+    breakdowns = ["dgender", "age1215", "nal7utg4"]
     responses = ["daluspar", "dalussib", "dalusfreb", "dalusfreo", "dalusfres",
                  "dalusgb", "dalusoth", "dalusfre", "alownoth"]
     question = "whodrink"
@@ -320,9 +319,9 @@ def create_breakdown_sex_age1215_nal7ut_whodrink(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_dallast3_dalwhodr_dalfamknw(df):
+def create_breakdown_dallast3_dalfamknw(df):
 
-    breakdowns = ["dallast3", "dalwhodr"]
+    breakdowns = ["dallast3"]
     question = "dalfamknw"
     # Note: dalfamknw should not have a value 8, this filter is only needed so 2018 processing is correct
     filter_condition = "(dalfamknw != 8) & (dalfrq7 in [1, 2, 3, 4, 5, 6])"
@@ -332,7 +331,7 @@ def create_breakdown_dallast3_dalwhodr_dalfamknw(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1315_alcohol_buywherebuy(df):
+def create_breakdown_age1315_alcohol_buywherebuy(df):
 
     breakdowns = ["age1315"]
     responses = ["albuyfre", "albuyels", "albuystr", "albuyoff", "albuyshp",
@@ -348,10 +347,10 @@ def create_breakdown_sex_age1315_alcohol_buywherebuy(df):
 
 # Drinking context tables begin here
 
-def create_breakdown_sex_age1115_dallast_nal7ut_dalwhodr_dalfam(df):
-    breakdowns = ["sex", "age1115", "dallast3", "nal7utg4", "dalwhodr"]
+def create_breakdown_dgender_age1115_dallast_nal7ut_dalfam(df):
+    breakdowns = ["dgender", "age1115", "dallast3", "nal7utg4"]
     question = "dalfam"
-    filter_condition = None
+    filter_condition = "dalfrq7 in [1, 2, 3, 4, 5, 6]"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition,
@@ -361,7 +360,7 @@ def create_breakdown_sex_age1115_dallast_nal7ut_dalwhodr_dalfam(df):
 def create_breakdown_dalfamknw_dalfam(df):
     breakdowns = ["dalfamknw"]
     question = "dalfam"
-    filter_condition = "dalfrq7 in [1, 2, 3, 4, 5, 6]"
+    filter_condition = "(dalfrq7 in [1, 2, 3, 4, 5, 6]) & (dalfamknw == 1)"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition,
@@ -371,88 +370,28 @@ def create_breakdown_dalfamknw_dalfam(df):
 def create_breakdown_dalfam_dal4dru5(df):
     breakdowns = ["dalfam"]
     question = "dal4dru5"
-    filter_condition = None
+    filter_condition = "dalfrq7 in [1, 2, 3, 4, 5, 6]"
     subgroup = {7: [2, 3, 6]}
 
     return create_breakdown_single(df, breakdowns, question, filter_condition,
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_drinking_consequences(df):
+def create_breakdown_dalfam_dfasbands_imdquin_dallast3(df):
 
-    breakdowns = ["sex", "age1115"]
-    responses = ["alcncr", "alhrm"]
-    question = "consequences"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_sex_age1115_dallast3_beliefs(df):
-
-    breakdowns = ["sex", "age1115", "dallast3"]
-    responses = ["alwhycoo", "alwhysoc", "alwhyrsh", "alwhypre", "alwhyfgt",
-                 "alwhyliv", "alwhycon", "alwhybor", "alwhyrel"]
-    question = "beliefs"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_sex_age1115_alestim(df):
-    breakdowns = ["sex", "age1115"]
-    question = "alestim"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition,
-                                   subgroup)
-
-
-def create_breakdown_dallast3_alestim(df):
-    breakdowns = ["dallast3"]
-    question = "alestim"
-    filter_condition = "age1115 == 15"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition,
-                                   subgroup)
-
-
-def create_breakdown_sex_age1115_dallast3_source(df):
-
-    breakdowns = ["sex", "age1115", "dallast3"]
-    responses = ["alinpar", "alintea", "alinrel", "alinpol", "alinfre",
-                 "alinad", "alingp", "alinsib", "alinyou", "alinyou", "alintv",
-                 "alinint", "alinnews", "alinsoc", "alinrad", "alinhelp",
-                 "alinfra"]
-    question = "source"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_dalwhodr_dalfam_dfasbands_imdquin_dallast3(df):
-
-    breakdowns = ["dalwhodr", "dalfam", "dfasbands", "imdquin"]
+    breakdowns = ["dalfam", "dfasbands", "imdquin"]
     question = "dallast3"
-    filter_condition = "dallast3 in [1, 2, 3]"
+    filter_condition = "dalfrq7 in [1, 2, 3, 4, 5, 6]"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition,
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_dallast_attitudes(df):
+def create_breakdown_dgender_age1115_dallast_attitudes(df):
 
-    breakdowns = ["sex", "age1115", "dallast3"]
-    responses = ["okal1", "okalw", "okdk1", "okdkw"]
+    breakdowns = ["dgender", "age1115", "dallast3"]
+    responses = ["dokal1", "dokalw", "dokdk1", "dokdkw"]
     question = "attitudes"
     bases = responses
     filter_condition = None
@@ -464,7 +403,7 @@ def create_breakdown_sex_age1115_dallast_attitudes(df):
 def create_breakdown_dal4dru_attitudes(df):
 
     breakdowns = ["dal4dru5"]
-    responses = ["okal1", "okalw", "okdk1", "okdkw"]
+    responses = ["dokal1", "dokalw", "dokdk1", "dokdkw"]
     question = "attitudes"
     bases = responses
     filter_condition = "(dallast5 in [1, 2]) & (al4wdru >= 0)"
@@ -472,13 +411,24 @@ def create_breakdown_dal4dru_attitudes(df):
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
+
+def create_breakdown_dfasbands_imdquin_dallast3(df):
+
+    breakdowns = ["dfasbands", "imdquin"]
+    question = "dallast3"
+    filter_condition = None
+    subgroup = None
+
+    return create_breakdown_single(df, breakdowns, question, filter_condition,
+                                   subgroup)
+
 # School lesson tables begin here
 
 
-def create_breakdown_sex_syear_puplessons(df):
+def create_breakdown_dgender_syear_puplessons(df):
 
-    breakdowns = ["sex", "syear"]
-    responses = ["lssmk", "lsalc", "lsdrg"]
+    breakdowns = ["dgender", "syear"]
+    responses = ["dlssmk", "dlsalc", "dlsdrg"]
     question = "puplessons"
     bases = responses
     filter_condition = None
@@ -487,10 +437,10 @@ def create_breakdown_sex_syear_puplessons(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_syear_info(df):
+def create_breakdown_dgender_syear_info(df):
 
-    breakdowns = ["sex", "syear"]
-    responses = ["einfsmk", "einfalc", "einfdrg"]
+    breakdowns = ["dgender", "syear"]
+    responses = ["deinfsmk", "deinfalc", "deinfdrg"]
     question = "info"
     bases = responses
     filter_condition = None
@@ -515,7 +465,7 @@ def create_breakdown_contributes(df):
 
     breakdowns = []
     responses = ["q7teach", "q7nurse", "q7staff", "q7locdaa", "q7police",
-                 "q7youth", "q7else"]
+                 "q7youth", "q7agen", "q7pshe"]
     question = "contributes"
     bases = responses
     filter_condition = None
@@ -527,8 +477,8 @@ def create_breakdown_contributes(df):
 def create_breakdown_sources(df):
 
     breakdowns = []
-    responses = ["q8adepis", "q8def", "q8else", "q8frank", "q8oteach",
-                 "q8pshe", "q8search", "q8tes", "q8dfe"]
+    responses = ["q8frank", "q8pshe", "q8search", "q8tes", "q8oteach",
+                 "q8dfe"]
     question = "sources"
     bases = responses
     filter_condition = None
@@ -540,7 +490,7 @@ def create_breakdown_sources(df):
 def create_breakdown_otheradvice(df):
     breakdowns = []
     responses = ["q10assem", "q10advic", "q10leaf", "q10post", "q10speak",
-                 "q10else", "edadvice"]
+                 "edadvice"]
     question = "otheradvice"
     bases = responses
     filter_condition = None
@@ -551,7 +501,8 @@ def create_breakdown_otheradvice(df):
 
 def create_breakdown_lessonssmoking(df):
     breakdowns = None
-    questions = ["y7smok", "y8smok", "y9smok", "y10smok", "y11smok"]
+    questions = ["y7smok", "y8smok", "y9smok",
+                 "y10smok", "y11smok"]
     filter_condition = "{question} != 6"
     subgroup = None
 
@@ -561,7 +512,8 @@ def create_breakdown_lessonssmoking(df):
 
 def create_breakdown_lessonsdrinking(df):
     breakdowns = None
-    questions = ["y7alc", "y8alc", "y9alc", "y10alc", "y11alc"]
+    questions = ["y7alc", "y8alc", "y9alc",
+                 "y10alc", "y11alc"]
     filter_condition = "{question} != 6"
     subgroup = None
 
@@ -571,7 +523,8 @@ def create_breakdown_lessonsdrinking(df):
 
 def create_breakdown_lessonsdrugs(df):
     breakdowns = None
-    questions = ["y7drg", "y8drg", "y9drg", "y10drg", "y11drg"]
+    questions = ["y7drg", "y8drg", "y9drg",
+                 "y10drg", "y11drg"]
     filter_condition = "{question} != 6"
     subgroup = None
 
@@ -582,9 +535,9 @@ def create_breakdown_lessonsdrugs(df):
 # Smoking prevalence tables begin here
 
 
-def create_breakdown_sex_age_region_ethnicgp5_dcgstg5(df):
+def create_breakdown_dgender_age_region_ethnicgp5_dcgstg5(df):
 
-    breakdowns = ["sex", "age1115", "region", "ethnicgp5"]
+    breakdowns = ["dgender", "age1115", "region", "ethnicgp5"]
     question = "dcgstg5"
     filter_condition = None
     subgroup = {6: [1, 2], 7: [1, 2, 3, 4]}
@@ -593,9 +546,9 @@ def create_breakdown_sex_age_region_ethnicgp5_dcgstg5(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age_cg7(df):
+def create_breakdown_dgender_age_cg7(df):
 
-    breakdowns = ["sex", "age1115"]
+    breakdowns = ["dgender", "age1115"]
     question = "cg7"
     filter_condition = None
     subgroup = None
@@ -615,9 +568,9 @@ def create_breakdown_dcgstg5_dcg7totg(df):
                                    subgroup)
 
 
-def create_breakdown_stats_sex_dcgstg3_dcg7tot(df):
+def create_breakdown_stats_dgender_dcgstg3_dcg7tot(df):
 
-    breakdowns = ["sex", "dcgstg3"]
+    breakdowns = ["dgender", "dcgstg3"]
     questions = ["dcg7tot"]
     base = "dcg7tot"
     filter_condition = "dcgstg3 in [1, 2]"
@@ -626,9 +579,9 @@ def create_breakdown_stats_sex_dcgstg3_dcg7tot(df):
                                        filter_condition)
 
 
-def create_breakdown_stats_sex_dcgstg3_cg7(df):
+def create_breakdown_stats_dgender_dcgstg3_cg7(df):
 
-    breakdowns = ["sex", "dcgstg3"]
+    breakdowns = ["dgender", "dcgstg3"]
     questions = ["dcg7tot", "cg7mon", "cg7tue", "cg7wed", "cg7thu",
                  "cg7fri", "cg7sat", "cg7sun"]
     base = "dcg7tot"
@@ -675,58 +628,8 @@ def create_breakdown_age1315_cgdiff(df):
                                    subgroup)
 
 
-def create_breakdown_age1115_cgshop(df):
-
-    breakdowns = ["age1115"]
-    question = "cgshop"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_age1115_cgshopp(df):
-
-    breakdowns = ["sex", "age1115"]
-    question = "cgshopp"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dcgstg3_cgshopp(df):
-
-    breakdowns = ["dcgstg3"]
-    question = "cgshopp"
-    filter_condition = "dcgstg3 in [1, 2]"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_age1315_cgref(df):
-
-    breakdowns = ["age1315"]
-    question = "cgref"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_age1315_cglast(df):
-
-    breakdowns = ["age1315"]
-    question = "cglast"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dcgstg3_sex_age1315_cgsourcecurr(df):
-    breakdowns = ["dcgstg3", "sex", "age1315"]
+def create_breakdown_dcgstg3_dgender_age1315_cgsourcecurr(df):
+    breakdowns = ["dcgstg3", "dgender", "age1315"]
     responses = ["dcggetp", "dcggets", "dcgbuyp", "cggetelg",
                  "cggetels", "cggetfre", "cggetgar", "cggetgiv", "cggetint",
                  "cggetmac", "cggetmar", "cggetnew", "cggetoth", "cggetpar",
@@ -753,16 +656,6 @@ def create_breakdown_cgsourcereg(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_cgbuyf(df):
-
-    breakdowns = []
-    question = "cgbuyf"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
 def create_breakdown_cgstopdif(df):
 
     breakdowns = None
@@ -784,9 +677,9 @@ def create_breakdown_cgstoplik(df):
                                            filter_condition, subgroup)
 
 
-def create_breakdown_sex_cglong(df):
+def create_breakdown_dgender_cglong(df):
 
-    breakdowns = ["sex"]
+    breakdowns = ["dgender"]
     question = "cglong"
     filter_condition = "dcgstg3 == 1"
     subgroup = None
@@ -804,9 +697,9 @@ def create_breakdown_dcglongg_dcg7totg2_depend(df):
                                            filter_condition, subgroup)
 
 
-def create_breakdown_sex_dcgtrystp(df):
+def create_breakdown_dgender_dcgtrystp(df):
 
-    breakdowns = ["sex"]
+    breakdowns = ["dgender"]
     question = "dcgtrystp"
     filter_condition = "dcgstg3 == 1"
     subgroup = None
@@ -814,43 +707,23 @@ def create_breakdown_sex_dcgtrystp(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_dcgstg3_dcgelbuy(df):
-
-    breakdowns = ["dcgstg3"]
-    question = "dcgelbuy"
-    filter_condition = "(dcgstg3 in [1, 2]) & (dcgelbuy in [1, 2])"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_age1215_dcgoft_method(df):
-    breakdowns = ["age1215", "dcgoft"]
+def create_breakdown_age1215_dcgoft_methodv2(df):
+    breakdowns = ["dcgoft"]
     responses = ["dcggupno", "dcggupfa", "dcggupni", "dcggupad", "dcggupgp",
-                 "dcggupst", "dcgguphe", "dcggupecg", "dcggupany"]
+                 "dcggupst", "dcgguphe", "dcggupev", "dcggupany"]
     question = "method"
     bases = responses
-    filter_condition = "dcgstg5 in [1, 2, 3, 4]"
+    filter_condition = "dcgoft == 3"
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
 
-def create_breakdown_dcgstg3_dcgwhosmo_dcgsec2(df):
+def create_breakdown_dcgstg3_dcgsec2(df):
 
-    breakdowns = ["dcgstg3", "dcgwhosmo"]
+    breakdowns = ["dcgstg3"]
     question = "dcgsec2"
     filter_condition = "dcgstg3 in [1, 2]"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_age1315_dcgstg3_dcgelbuy(df):
-
-    breakdowns = ["sex", "age1315", "dcgstg3"]
-    question = "dcgelbuy"
-    filter_condition = "dcgelbuy in [1, 2]"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
@@ -859,9 +732,9 @@ def create_breakdown_sex_age1315_dcgstg3_dcgelbuy(df):
 # Smoking context tables begin here
 
 
-def create_breakdown_dcgwhosmo_dfasbands_imdquin_dcgstg3(df):
+def create_breakdown_dfasbands_imdquin_dcgstg3(df):
 
-    breakdowns = ["dcgwhosmo", "dfasbands", "imdquin"]
+    breakdowns = ["dfasbands", "imdquin"]
     question = "dcgstg3"
     filter_condition = None
     subgroup = {6: [1, 2]}
@@ -893,19 +766,19 @@ def create_breakdown_age1115_dcgstg2_frfamsmoke(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1315_dcgstg3_dcgwhosmo_dcgfam(df):
+def create_breakdown_dgender_age1315_dcgstg3_dcgfam(df):
 
-    breakdowns = ["sex", "age1115", "dcgstg3", "dcgwhosmo"]
+    breakdowns = ["dgender", "dcgstg3"]
     question = "dcgfam"
-    filter_condition = None
+    filter_condition = "dcgstg3 in [1, 2]"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_dcgstg2_dcgwhosmo_dcgfam(df):
+def create_breakdown_dgender_age1315_dcgstg2_dcgfam(df):
 
-    breakdowns = ["sex", "age1115", "dcgstg2", "dcgwhosmo"]
+    breakdowns = ["dgender", "age1115", "dcgstg2"]
     question = "dcgfam"
     filter_condition = None
     subgroup = None
@@ -943,9 +816,9 @@ def create_breakdown_age1115_dcgstg2_cgsmkexp(df):
                                            filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1115_dcgstg3_attitudes(df):
-    breakdowns = ["sex", "age1115", "dcgstg3"]
-    responses = ["okcg1", "okcgw"]
+def create_breakdown_dgender_age1115_dcgstg3_attitudes(df):
+    breakdowns = ["dgender", "age1115", "dcgstg3"]
+    responses = ["dokcg1", "dokcgw"]
     question = "attitudes"
     bases = responses
     filter_condition = None
@@ -954,102 +827,11 @@ def create_breakdown_sex_age1115_dcgstg3_attitudes(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1115_dcgstg2_attitudes(df):
-    breakdowns = ["sex", "age1115", "dcgstg2"]
-    responses = ["okcg1", "okcgw"]
+def create_breakdown_dgender_age1115_dcgstg2_attitudes(df):
+    breakdowns = ["dgender", "age1115", "dcgstg2"]
+    responses = ["dokcg1", "dokcgw"]
     question = "attitudes"
     bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_sex_age1115_dcgstg3_beliefs(df):
-    breakdowns = ["sex", "age1115", "dcgstg3"]
-    responses = ["cgwhycoo", "cgwhypre", "cgwhyadd", "cgwhyexc", "cgwhystr",
-                 "cgwhyliv", "cgwhygdf", "cgwhyrel", "cgwhyslm"]
-    question = "beliefs"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_sex_age1115_dcgstg2_beliefs(df):
-    breakdowns = ["sex", "age1115", "dcgstg2"]
-    responses = ["cgwhycoo", "cgwhypre", "cgwhyadd", "cgwhyexc", "cgwhystr",
-                 "cgwhyliv", "cgwhygdf", "cgwhyrel", "cgwhyslm"]
-    question = "beliefs"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_sex_age1315_cgppfrsa_cgestim(df):
-
-    breakdowns = ["sex", "age1115", "cgppfrsa"]
-    question = "cgestim"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dcgstg3_cgestim(df):
-
-    breakdowns = ["dcgstg3"]
-    question = "cgestim"
-    filter_condition = "age1115 == 15"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dcgstg2_cgestim(df):
-
-    breakdowns = ["dcgstg2"]
-    question = "cgestim"
-    filter_condition = "age1115 == 15"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_age1115_dcgstg3_sources(df):
-    breakdowns = ["sex", "age1115", "dcgstg3"]
-    responses = ["cginpar", "cgintea", "cginrel", "cginpol", "cginfre",
-                 "cginad", "cgingp", "cginsib", "cginyou", "cgintv", "cginint",
-                 "cginnews", "cginsoc", "cginrad", "cginhelp", "cginfra"]
-    question = "sources"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_sex_age1115_dcgstg2_sources(df):
-    breakdowns = ["sex", "age1115", "dcgstg2"]
-    responses = ["cginpar", "cgintea", "cginrel", "cginpol", "cginfre",
-                 "cginad", "cgingp", "cginsib", "cginyou", "cgintv", "cginint",
-                 "cginnews", "cginsoc", "cginrad", "cginhelp", "cginfra"]
-    question = "sources"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
-
-
-def create_breakdown_age1115_wheredisplay(df):
-    breakdowns = ["age1115"]
-    responses = ["cgpdsup", "cgpdnew", "cgpdgar", "cgpdoth", "cgpdnone"]
-    question = "wheredisplay"
-    bases = ["cgpdsup"]
     filter_condition = None
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
@@ -1059,9 +841,9 @@ def create_breakdown_age1115_wheredisplay(df):
 # E cigarette use tables begin here
 
 
-def create_breakdown_sex_age1315_cgelechd(df):
+def create_breakdown_dgender_age1315_cgelechd(df):
 
-    breakdowns = ["sex", "age1115"]
+    breakdowns = ["dgender", "age1115"]
     question = "cgelechd"
     filter_condition = None
     subgroup = None
@@ -1069,8 +851,8 @@ def create_breakdown_sex_age1315_cgelechd(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_ecig_sources(df):
-    breakdowns = ["sex", "age1315"]
+def create_breakdown_dgender_age1315_ecig_sources(df):
+    breakdowns = ["dgender", "age1315"]
     responses = ["dcgelgtoth", "dcgelgtgiv", "dcgelgtshp", "dcgelgtppl", "cgelgtgiv",
                  "cgelgtsib", "cgelgtpar", "cgelgtelg", "cgelgtnew", "cgelgtsho",
                  "cgelgtsup", "cgelgtpha", "cgelgtgar", "cgelgtgot", "cgelgtfre",
@@ -1083,9 +865,9 @@ def create_breakdown_sex_age1315_ecig_sources(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1115_dcgstg5_dcgelec(df):
+def create_breakdown_dgender_age1115_region_dcgstg5_dcgelec(df):
 
-    breakdowns = ["sex", "age1115", "dcgstg5"]
+    breakdowns = ["dgender", "age1115", "region", "dcgstg5"]
     question = "dcgelec"
     filter_condition = None
     subgroup = {7: [1, 2], 8: [5, 6], 9: [3, 4, 5, 6]}
@@ -1093,9 +875,9 @@ def create_breakdown_sex_age1115_dcgstg5_dcgelec(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1115_ecig_attitudes(df):
-    breakdowns = ["sex", "age1115"]
-    responses = ["okec1", "okecw"]
+def create_breakdown_dgender_age1115_ecig_attitudes(df):
+    breakdowns = ["dgender", "age1115"]
+    responses = ["dokec1", "dokecw"]
     question = "attitudes"
     bases = responses
     filter_condition = None
@@ -1104,51 +886,21 @@ def create_breakdown_sex_age1115_ecig_attitudes(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1115_cgelshopp(df):
+def create_breakdown_dgender_cgellong(df):
 
-    breakdowns = ["sex", "age1115"]
-    question = "cgelshopp"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dcgelec_cgelshopp(df):
-
-    breakdowns = ["dcgelec"]
-    question = "cgelshopp"
-    filter_condition = "dcgelec in [5, 6]"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_age1215_cgelacbshp(df):
-
-    breakdowns = ["sex", "age1215"]
-    question = "cgelacbsp"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dcgelec_cgelacbshp(df):
-
-    breakdowns = ["dcgelec"]
-    question = "cgelacbsp"
-    filter_condition = "dcgelec in [5, 6]"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_cgellong(df):
-
-    breakdowns = ["sex"]
+    breakdowns = ["dgender"]
     question = "cgellong"
     filter_condition = "dcgelec == 6"
+    subgroup = None
+
+    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
+
+
+def create_breakdown_dgender_cgnbavap(df):
+
+    breakdowns = ["dgender"]
+    question = "cgnbavap"
+    filter_condition = "dcgelec in [3, 4, 5, 6]"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
@@ -1157,8 +909,8 @@ def create_breakdown_sex_cgellong(df):
 # Drug prevalence tables begin here
 
 
-def create_breakdown_sex_age1115_region_ethnicgp5_druguse(df):
-    breakdowns = ["sex", "age1115", "region", "ethnicgp5"]
+def create_breakdown_dgender_age1115_region_ethnicgp5_druguse(df):
+    breakdowns = ["dgender", "age1115", "region", "ethnicgp5"]
     responses = ["ddgany", "ddgyrany", "ddgmonany", "ddganynotvs",
                  "ddgyranynotvs", "ddgmonanynotvs"]
     question = "druguse"
@@ -1169,9 +921,9 @@ def create_breakdown_sex_age1115_region_ethnicgp5_druguse(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1315_ddgyrty(df):
+def create_breakdown_dgender_age1315_ddgyrty(df):
 
-    breakdowns = ["sex", "age1315"]
+    breakdowns = ["dgender", "age1315"]
     question = "ddgyrty"
     filter_condition = "ddgyrty != 7"
     subgroup = {10: [1, 2, 3, 4], 11: [5, 6]}
@@ -1179,9 +931,9 @@ def create_breakdown_sex_age1315_ddgyrty(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1115_ddgoc(df):
+def create_breakdown_dgender_age1115_ddgoc(df):
 
-    breakdowns = ["sex", "age1115"]
+    breakdowns = ["dgender", "age1115"]
     question = "ddgoc"
     filter_condition = None
     subgroup = None
@@ -1189,8 +941,8 @@ def create_breakdown_sex_age1115_ddgoc(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1115_drugusetype(df):
-    breakdowns = ["sex", "age1115"]
+def create_breakdown_dgender_age1115_drugusetype(df):
+    breakdowns = ["dgender", "age1115"]
     questions = ["dusecan", "dusecok", "dusecrk", "duseecs", "duseamp",
                  "dusepop", "dusemph", "duselsd", "dusemsh", "duseket",
                  "dusenox", "duseleg", "duseher", "dusemth", "dusegas",
@@ -1207,9 +959,9 @@ def create_breakdown_sex_age1115_drugusetype(df):
                                            filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_dgocleg(df):
+def create_breakdown_dgender_age1315_dgocleg(df):
 
-    breakdowns = ["sex", "age1315"]
+    breakdowns = ["dgender", "age1315"]
     question = "dgocleg"
     filter_condition = "dgocleg in [1, 2, 3, 4]"
     subgroup = None
@@ -1217,19 +969,32 @@ def create_breakdown_sex_age1315_dgocleg(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
+def create_breakdown_dgender_age1315_drugoccasion(df):
+
+    breakdowns = ["dgender"]
+    questions = ["dgocamp", "dgoccan", "dgoccok", "dgoccrk", "dgocecs", "dgocgas",
+                 "dgocher", "dgocket", "dgocleg", "dgoclsd", "dgocmph", "dgocmsh",
+                 "dgocmth", "dgocnox", "dgocoth", "dgocpop", "dgoctrn"]
+    filter_condition = "ddgany == 1"
+    subgroup = None
+
+    return create_breakdown_single_combine(df, breakdowns, questions,
+                                           filter_condition, subgroup)
+
+
 def create_breakdown_age1315_ddgyrty5_ddgoc(df):
 
     breakdowns = ["age1315", "ddgyrty5"]
     question = "ddgoc"
-    filter_condition = "ddgoc >= 3"
+    filter_condition = "ddgyrany == 1"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_ddgtypleg(df):
+def create_breakdown_dgender_age1315_ddgtypleg(df):
 
-    breakdowns = ["sex", "age1315"]
+    breakdowns = ["dgender", "age1315"]
     question = "ddgtypleg"
     filter_condition = "dgocleg in [1, 2, 3, 4]"
     subgroup = None
@@ -1237,9 +1002,9 @@ def create_breakdown_sex_age1315_ddgtypleg(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1215_ddgfq6(df):
+def create_breakdown_dgender_age1215_ddgfq6(df):
 
-    breakdowns = ["sex", "age1215"]
+    breakdowns = ["dgender", "age1215"]
     question = "ddgfq6"
     filter_condition = None
     subgroup = None
@@ -1247,9 +1012,9 @@ def create_breakdown_sex_age1215_ddgfq6(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1215_ddgfq8(df):
+def create_breakdown_dgender_age1215_ddgfq8(df):
 
-    breakdowns = ["sex", "age1215"]
+    breakdowns = ["dgender", "age1215"]
     question = "ddgfq8"
     filter_condition = None
     subgroup = {10: [1, 2, 3]}
@@ -1257,9 +1022,9 @@ def create_breakdown_sex_age1215_ddgfq8(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_ddgfq8_lastyr(df):
+def create_breakdown_dgender_age1315_ddgfq8_lastyr(df):
 
-    breakdowns = ["sex", "age1315"]
+    breakdowns = ["dgender", "age1315"]
     question = "ddgfq8"
     filter_condition = "ddgfq8 in [1, 2, 3, 4, 5, 6]"
     subgroup = {10: [1, 2, 3]}
@@ -1297,8 +1062,8 @@ def create_breakdown_dtruexc_ddgfq6(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1115_drugoff(df):
-    breakdowns = ["sex", "age1115"]
+def create_breakdown_dgender_age1115_drugoff(df):
+    breakdowns = ["dgender", "age1115"]
     responses = ["ddgofcan", "ddgofcok", "ddgofcrk", "ddgofecs", "ddgofamp",
                  "ddgofpop", "ddgofmph", "ddgoflsd", "ddgofmsh", "ddgofket",
                  "ddgofnox", "ddgofleg", "ddgofher", "ddgofmth", "ddgofgas",
@@ -1312,8 +1077,8 @@ def create_breakdown_sex_age1115_drugoff(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age15_anydrugofftaken(df):
-    breakdowns = ["sex"]
+def create_breakdown_dgender_age15_anydrugofftaken(df):
+    breakdowns = ["dgender"]
     question = "ddgany"
     filter_condition = "(age1115 == 15) & (ddgofany == 1)"
     subgroup = None
@@ -1359,8 +1124,8 @@ def create_breakdown_ddgageany11_ddgfirst(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age15_canofftaken(df):
-    breakdowns = ["sex"]
+def create_breakdown_dgender_age15_canofftaken(df):
+    breakdowns = ["dgender"]
     question = "dgtdcan"
     filter_condition = "(age1115 == 15) & (ddgofcan == 1) & (dusecan > 0)"
     subgroup = None
@@ -1368,8 +1133,8 @@ def create_breakdown_sex_age15_canofftaken(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age15_claofftaken(df):
-    breakdowns = ["sex"]
+def create_breakdown_dgender_age15_claofftaken(df):
+    breakdowns = ["dgender"]
     question = "ddgevrcla"
     filter_condition = "(age1115 == 15) & (ddgofcla == 1)"
     subgroup = None
@@ -1386,10 +1151,10 @@ def create_breakdown_ddgageany11_ddgfttyp(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_ddglttyp(df):
-    breakdowns = ["sex", "age1315"]
+def create_breakdown_dgender_age1315_ddglttyp(df):
+    breakdowns = ["dgender", "age1315"]
     question = "ddglttyp"
-    filter_condition = "ddgoc in [4, 5, 6]"
+    filter_condition = "ddgoc == 3"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
@@ -1397,56 +1162,56 @@ def create_breakdown_sex_age1315_ddglttyp(df):
 
 # Pupils who take drugs tables begin here
 
-def create_breakdown_sex_ddgageany11_ddgfttyp_dgftwh(df):
-    breakdowns = ["sex", "ddgageany11", "ddgfttyp"]
+def create_breakdown_dgender_ddgageany11_ddgfttyp_dgftwh(df):
+    breakdowns = ["dgender", "ddgageany11", "ddgfttyp"]
     question = "dgftwh"
-    filter_condition = "dgtdany == 1"
+    filter_condition = "ddgany == 1"
     subgroup = {20: [2, 3, 4, 5]}
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_ddglttyp_dgltwh(df):
-    breakdowns = ["sex", "age1315", "ddglttyp"]
+def create_breakdown_dgender_age1315_ddglttyp_dgltwh(df):
+    breakdowns = ["dgender", "age1315", "ddglttyp"]
     question = "dgltwh"
-    filter_condition = "ddgoc in [4, 5, 6]"
+    filter_condition = "ddgoc == 3"
     subgroup = {20: [2, 3, 4, 5]}
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_ddglttyp_dgltwhr(df):
-    breakdowns = ["sex", "age1315", "ddglttyp"]
+def create_breakdown_dgender_age1315_ddglttyp_dgltwhr(df):
+    breakdowns = ["dgender", "age1315", "ddglttyp"]
     question = "dgltwhr"
-    filter_condition = "ddgoc in [4, 5, 6]"
+    filter_condition = "ddgoc == 3"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age_ddgofany_dgget(df):
-    breakdowns = ["sex", "age1115", "age1315", "ddgofany"]
-    question = "dgget"
+def create_breakdown_dgender_age_ddgofany_ddgget(df):
+    breakdowns = ["dgender", "age1115", "age1315", "ddgofany"]
+    question = "ddgget"
     filter_condition = None
-    subgroup = {10: [1, 2], 11: [3, 4]}
+    subgroup = {10: [3, 4], 11: [1, 2]}
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_sex_age1315_ddglttyp_whowith(df):
-    breakdowns = ["sex", "age1315", "ddglttyp"]
+def create_breakdown_dgender_age1315_ddglttyp_whowith(df):
+    breakdowns = ["dgender", "age1315", "ddglttyp"]
     responses = ["ddgltwogbf", "ddgltwofrs", "ddgltwofro", "ddgltwofrb", "ddgltwopar",
                  "ddgltwooth", "ddgltwoels", "ddgltown", "ddgltwofre"]
     question = "whowith"
     bases = responses
-    filter_condition = "dgoc in [2, 3, 4]"
+    filter_condition = "ddgoc == 3"
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1115_dgbuy(df):
-    breakdowns = ["sex", "age1115"]
+def create_breakdown_dgender_age1115_dgbuy(df):
+    breakdowns = ["dgender", "age1115"]
     questions = ["dgbuyint", "dgbuyshp"]
     filter_condition = None
     subgroup = None
@@ -1467,44 +1232,35 @@ def create_breakdown_ddgyrty5_dgbuy(df):
 
 # Drug context tables begin here
 
-def create_breakdown_sex_ddgageany11_ddgfttyp_ddgftwy(df):
-    breakdowns = ["sex", "ddgageany11", "ddgfttyp"]
+def create_breakdown_dgender_ddgageany11_ddgfttyp_ddgftwy(df):
+    breakdowns = ["dgender", "ddgageany11", "ddgfttyp"]
     responses = ["dgftwylke", "dgftwyhig", "dgftwyfri", "dgftwynbt", "dgftwyfor",
                  "dgftwyoff", "dgftwydar", "dgftwycoo", "dgftwyoth", "dgftwynkn",
                  "dgftwynre"]
     question = "ddgftwy"
     bases = responses
-    filter_condition = "dgtdany == 1"
+    filter_condition = "ddgany == 1"
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1315_ddglttyp_ddgoc_ddgltwy(df):
-    breakdowns = ["sex", "age1315", "ddglttyp", "ddgoc"]
+def create_breakdown_dgender_age1315_ddglttyp_ddgoc_ddgltwy(df):
+    breakdowns = ["dgender", "age1315", "ddglttyp", "ddgoc"]
     responses = ["dgltwycoo", "dgltwydar", "dgltwyfor", "dgltwyfri",
                  "dgltwyhig", "dgltwylke", "dgltwynbt", "dgltwynkn",
                  "dgltwynre", "dgltwyoff", "dgltwyoth"]
     question = "ddgltwy"
     bases = responses
-    filter_condition = "ddgoc in [4, 5, 6]"
+    filter_condition = "ddgoc == 3"
 
     return create_breakdown_multiple_discrete(df, breakdowns, responses,
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1115_ddgoc4_dgestim(df):
-    breakdowns = ["sex", "age1115", "ddgoc4"]
-    question = "dgestim"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_age1115_drugattitudes(df):
-    breakdowns = ["sex", "age1115"]
-    responses = ["okcan1", "okvs1", "okcoc1", "okcanw", "okvsw", "okcocw"]
+def create_breakdown_dgender_age1115_drugattitudes(df):
+    breakdowns = ["dgender", "age1115"]
+    responses = ["dokcan1", "dokvs1", "dokcoc1", "dokcanw", "dokvsw", "dokcocw"]
     question = "attitudes"
     bases = responses
     filter_condition = None
@@ -1513,10 +1269,10 @@ def create_breakdown_sex_age1115_drugattitudes(df):
                                               question, bases, filter_condition)
 
 
-def create_breakdown_sex_age1115_ddgfam(df):
-    breakdowns = ["sex", "age1115"]
+def create_breakdown_dgender_age1115_ddgfam(df):
+    breakdowns = ["dgender", "age1115"]
     question = "ddgfam"
-    filter_condition = "ddgfam in [1, 2, 3, 4]"
+    filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
@@ -1525,39 +1281,27 @@ def create_breakdown_sex_age1115_ddgfam(df):
 def create_breakdown_ddgfamknw_ddgfam(df):
     breakdowns = ["ddgfamknw"]
     question = "ddgfam"
-    filter_condition = "(ddgoc in [4, 5, 6]) & (ddgfam in [1, 2, 3, 4])"
+    filter_condition = "(ddgany == 1) & (ddgfamknw == 1)"
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_ddgfam4_ddgoc(df):
-    breakdowns = ["ddgfam4"]
+# TODO review when table are produced
+def create_breakdown_ddgfam5_ddgoc(df):
+    breakdowns = ["ddgfam5"]
     question = "ddgoc"
-    filter_condition = "ddgfam4 in [1, 2, 3]"
-    subgroup = {10: [1, 2]}
+    filter_condition = None
+    subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_age1115_ddglast3_sources(df):
-    breakdowns = ["sex", "age1115", "ddglast3"]
-    responses = ["dginpar", "dginsib", "dginrel", "dginfre", "dgingp",
-                 "dgintea", "dginad", "dginpol", "dgintv", "dginrad",
-                 "dginnews", "dginint", "dginfra", "dginhelp", "dginsoc"]
-    question = "sources"
-    bases = responses
-    filter_condition = None
-
-    return create_breakdown_multiple_discrete(df, breakdowns, responses,
-                                              question, bases, filter_condition)
 
 
 def create_breakdown_dfasbands_imdquin_ddglast3(df):
     breakdowns = ["dfasbands", "imdquin"]
     question = "ddglast3"
-    filter_condition = "ddglast3 in [1, 2, 3]"
-    subgroup = None
+    filter_condition = "ddglast3 in [1, 2, 3, 4]"
+    subgroup = {5: [2, 3]}
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
@@ -1599,8 +1343,9 @@ def create_breakdown_age1115_behavoverlap(df):
 
 def create_breakdown_age1115_attitudes(df):
     breakdowns = ["age1115"]
-    responses = ["okcg1", "okal1", "okdk1", "okcan1", "okvs1", "okcoc1", "okec1",
-                 "okcgw", "okalw", "okdkw", "okcanw", "okvsw", "okcocw", "okecw"]
+    responses = ["dokcg1", "dokal1", "dokdk1", "dokcan1", "dokvs1", "dokcoc1",
+                 "dokec1", "dokcgw", "dokalw", "dokdkw", "dokcanw", "dokvsw",
+                 "dokcocw", "dokecw"]
     question = "attitudes"
     bases = responses
     filter_condition = None
@@ -1611,8 +1356,8 @@ def create_breakdown_age1115_attitudes(df):
 
 # Wellbeing tables begin here
 
-def create_breakdown_sex_age1115_region_dlifsat(df):
-    breakdowns = ["sex", "age1115", "region"]
+def create_breakdown_dgender_age1115_region_dlifsat(df):
+    breakdowns = ["dgender", "age1115", "region"]
     question = "dlifsat"
     filter_condition = None
     subgroup = None
@@ -1630,8 +1375,8 @@ def create_breakdown_cg7_dallast5_ddgmonany_dmulticount_dlifsat(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_region_dlifwor(df):
-    breakdowns = ["sex", "age1115", "region"]
+def create_breakdown_dgender_age1115_region_dlifwor(df):
+    breakdowns = ["dgender", "age1115", "region"]
     question = "dlifwor"
     filter_condition = None
     subgroup = None
@@ -1649,8 +1394,8 @@ def create_breakdown_cg7_dallast5_ddgmonany_dmulticount_dlifwor(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_region_dlifhap(df):
-    breakdowns = ["sex", "age1115", "region"]
+def create_breakdown_dgender_age1115_region_dlifhap(df):
+    breakdowns = ["dgender", "age1115", "region"]
     question = "dlifhap"
     filter_condition = None
     subgroup = None
@@ -1668,8 +1413,8 @@ def create_breakdown_cg7_dallast5_ddgmonany_dmulticount_dlifhap(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_region_dlifanx(df):
-    breakdowns = ["sex", "age1115", "region"]
+def create_breakdown_dgender_age1115_region_dlifanx(df):
+    breakdowns = ["dgender", "age1115", "region"]
     question = "dlifanx"
     filter_condition = None
     subgroup = None
@@ -1687,8 +1432,8 @@ def create_breakdown_cg7_dallast5_ddgmonany_dmulticount_dlifanx(df):
                                    subgroup)
 
 
-def create_breakdown_sex_age1115_dliflow(df):
-    breakdowns = ["sex", "age1115"]
+def create_breakdown_dgender_age1115_dliflow(df):
+    breakdowns = ["dgender", "age1115"]
     question = "dliflow"
     filter_condition = None
     subgroup = None
@@ -1696,299 +1441,64 @@ def create_breakdown_sex_age1115_dliflow(df):
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-# Covid impact tables begin here
-
-def create_breakdown_sex_schlearn_dcgstg5(df):
-    breakdowns = ["sex", "schlearn"]
-    question = "dcgstg5"
-    filter_condition = None
-    subgroup = {6: [1, 2], 7: [1, 2, 3, 4]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_schlearn_dcgelec(df):
-    breakdowns = ["sex", "schlearn"]
-    question = "dcgelec"
-    filter_condition = None
-    subgroup = {7: [1, 2], 8: [5, 6], 9: [3, 4, 5, 6]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_schlearn_dallast3(df):
-    breakdowns = ["sex", "schlearn"]
-    question = "dallast3"
-    filter_condition = None
-    subgroup = {10: [1, 2]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_dmet7dysg_cg7(df):
-    breakdowns = ["sex", "dmet7dysg"]
-    question = "cg7"
+def create_breakdown_dgender_age1115_region_dloncomp(df):
+    breakdowns = ["dgender", "age1115", "region"]
+    question = "dloncomp"
     filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_dmet7dysg_dcg7totg(df):
-    breakdowns = ["dmet7dysg"]
-    question = "dcg7totg"
-    filter_condition = "dcgsmk == 1"
-    subgroup = {10: [5, 6, 7]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dmet7dysg_nal7utg7(df):
-    breakdowns = ["dmet7dysg"]
-    question = "nal7utg7"
-    filter_condition = "dallast3 == 1"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_met4wks_schlearn_dalfrq7(df):
-    breakdowns = ["sex", "met4wks", "schlearn"]
-    question = "dalfrq7"
-    filter_condition = None
-    subgroup = {10: [1, 2, 3]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_met4wks_dal4dru5(df):
-    breakdowns = ["sex", "met4wks"]
-    question = "dal4dru5"
-    filter_condition = None
-    subgroup = {10: [2, 3, 6]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition,
-                                   subgroup)
-
-
-def create_breakdown_sex_met4wks_schlearn_druguse(df):
-    breakdowns = ["sex", "schlearn", "met4wks"]
-    questions = ["ddgmonany", "ddgyrany", "ddgany"]
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single_combine(df, breakdowns, questions, filter_condition, subgroup)
-
-
-def create_breakdown_sex_schlearn_ddgfq8_lastyr(df):
-    breakdowns = ["sex", "schlearn"]
-    question = "ddgfq8"
-    filter_condition = "ddgfq8 in [1, 2, 3, 4, 5, 6]"
-    subgroup = {10: [1, 2, 3]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_met4wks_behavrec(df):
-    breakdowns = ["sex", "met4wks"]
-    questions = ["cg7", "dallast5", "ddgmonany", "dmulticount"]
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single_combine(df, breakdowns, questions,
-                                           filter_condition, subgroup)
-
-
-def create_breakdown_sex_schlearn_lifebehav(df):
-    breakdowns = ["sex", "schlearn"]
-    questions = ["dcgevr", "alevr", "ddgany", "dmultievrcount"]
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single_combine(df, breakdowns, questions,
-                                           filter_condition, subgroup)
-
-
-def create_breakdown_sex_schlearn_met4wks_drugslastmth(df):
-    breakdowns = ["sex", "schlearn", "met4wks"]
-    questions = ["ddgmonany", "ddgmonvs", "ddgmoncan", "ddgmoncla", "ddgmultirec"]
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single_combine(df, breakdowns, questions, filter_condition, subgroup)
-
-
-def create_breakdown_met4wks_behavoverlap(df):
-    breakdowns = ["met4wks"]
-    question = "dmultioverlap"
-    filter_condition = None
-    subgroup = {10: [1, 2, 3], 11: [4, 5, 6]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_met4wks_dlifsat(df):
-    breakdowns = ["met4wks"]
-    question = "dlifsat"
+def create_breakdown_cg7_dallast5_ddgmonany_dmulticount_dloncomp(df):
+    breakdowns = ["cg7", "dallast5", "ddgmonany", "dmulticount"]
+    question = "dloncomp"
     filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_met4wks_dlifwor(df):
-    breakdowns = ["met4wks"]
-    question = "dlifwor"
+def create_breakdown_dgender_age1115_region_lonlonely(df):
+    breakdowns = ["dgender", "age1115", "region"]
+    question = "lonlonely"
     filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_met4wks_dlifhap(df):
-    breakdowns = ["met4wks"]
-    question = "dlifhap"
+def create_breakdown_cg7_dallast5_ddgmonany_dmulticount_lonlonely(df):
+    breakdowns = ["cg7", "dallast5", "ddgmonany", "dmulticount"]
+    question = "lonlonely"
     filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_met4wks_dlifanx(df):
-    breakdowns = ["met4wks"]
-    question = "dlifanx"
+def create_breakdown_dgender_age1115_lontalk(df):
+    breakdowns = ["dgender", "age1115"]
+    question = "lontalk"
     filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_dmet7dysg_dlifsat(df):
-    breakdowns = ["dmet7dysg"]
-    question = "dlifsat"
+def create_breakdown_dgender_age1115_lonout(df):
+    breakdowns = ["dgender", "age1115"]
+    question = "lonout"
     filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
 
 
-def create_breakdown_dmet7dysg_dlifwor(df):
-    breakdowns = ["dmet7dysg"]
-    question = "dlifwor"
+def create_breakdown_dgender_age1115_lonalone(df):
+    breakdowns = ["dgender", "age1115"]
+    question = "lonalone"
     filter_condition = None
     subgroup = None
 
     return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dmet7dysg_dlifhap(df):
-    breakdowns = ["dmet7dysg"]
-    question = "dlifhap"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_dmet7dysg_dlifanx(df):
-    breakdowns = ["dmet7dysg"]
-    question = "dlifanx"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-
-# Survey delivery tables begin here
-
-def create_breakdown_sex_appointflag_dcgstg5(df):
-    breakdowns = ["sex", "appointflag"]
-    question = "dcgstg5"
-    filter_condition = None
-    subgroup = {6: [1, 2], 7: [1, 2, 3, 4]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_appointflag_cg7(df):
-    breakdowns = ["sex", "appointflag"]
-    question = "cg7"
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_appointflag_dcg7totg(df):
-    breakdowns = ["appointflag"]
-    question = "dcg7totg"
-    filter_condition = "dcgsmk == 1"
-    subgroup = {10: [5, 6, 7]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_appointflag_dcgelec(df):
-    breakdowns = ["sex", "appointflag"]
-    question = "dcgelec"
-    filter_condition = None
-    subgroup = {7: [1, 2], 8: [5, 6], 9: [3, 4, 5, 6]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_appointflag_dallast3(df):
-    breakdowns = ["sex", "appointflag"]
-    question = "dallast3"
-    filter_condition = None
-    subgroup = {10: [1, 2]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_appointflag_nal7utg7(df):
-    breakdowns = ["appointflag"]
-    question = "nal7utg7"
-    filter_condition = "dallast3 == 1"
-    subgroup = None
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_appointflag_dalfrq7(df):
-    breakdowns = ["sex", "appointflag"]
-    question = "dalfrq7"
-    filter_condition = None
-    subgroup = {10: [1, 2, 3]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_appointflag_ddgfq8_lastyr(df):
-
-    breakdowns = ["sex", "appointflag"]
-    question = "ddgfq8"
-    filter_condition = "ddgfq8 in [1, 2, 3, 4, 5, 6]"
-    subgroup = {10: [1, 2, 3]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_appointflag_ddglast3(df):
-    breakdowns = ["sex", "appointflag"]
-    question = "ddglast3"
-    filter_condition = None
-    subgroup = {4: [1, 2]}
-
-    return create_breakdown_single(df, breakdowns, question, filter_condition, subgroup)
-
-
-def create_breakdown_sex_appointflag_drugslastmth(df):
-
-    breakdowns = ["sex", "appointflag"]
-    questions = ["ddgmonany", "ddgmonvs", "ddgmoncan", "ddgmoncla", "ddgmultirec"]
-    filter_condition = None
-    subgroup = None
-
-    return create_breakdown_single_combine(df, breakdowns, questions, filter_condition, subgroup)

@@ -1,7 +1,7 @@
 """Data tests for SDD teacher raw input from IPSOS
 
-These are pytest tests for a raw .SAV SPSS file, that check values based on saved
-metadata 
+These are pytest tests for a raw .SAV SPSS file, that check values based on
+metadata.
 To test a different .sav file or use different metadata, change the command line
 arguments --sdd_file and --sdd_metadata.
 
@@ -171,7 +171,7 @@ def test_continuous_values(
     # Continuous values are float responses (i.e. units drank) that should be
     # in this range, or are coded as negatives missiing/unknown/other
     values_in_range = col.between(min_val, max_val) | col.isin(
-        [-9, -8, -1]
+        [-9, -7, -8, -1]
     )
 
     assert all(

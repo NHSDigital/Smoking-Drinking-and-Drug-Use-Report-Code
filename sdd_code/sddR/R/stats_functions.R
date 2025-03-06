@@ -3,6 +3,7 @@
 # data.table - data manipulation and reshaping functions
 # here - Navigating project structure
 
+
 # This should not be required, and is bad practice to source files in a package,
 # however this is not a package (just local folder) so uses this to make functions
 # available when called from Python (it works automatically in RStudio)
@@ -95,7 +96,7 @@ survey_stats <- function(data, variable, by, psu, strata, weights) {
 }
 
 #' Calculate a weighted ratio of one variable against another, as well as
-#' standard errrors and confidence intervals
+#' standard errors and confidence intervals
 #'
 #'
 #' @param data A dataset

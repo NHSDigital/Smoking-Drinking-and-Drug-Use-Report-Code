@@ -128,4 +128,5 @@ def run_import_tests(
 
 if __name__ == "__main__":
     # Run tests
-    run_all_import_tests(pupil=True, teacher=True)
+    run_all_import_tests(pupil=param.RUN_PUPIL_INPUT_TESTS,
+                         teacher=param.RUN_TEACHER_INPUT_TESTS)

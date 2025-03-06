@@ -16,7 +16,7 @@ def get_models():
     model function.
     """
     output = {
-        "output_path": param.OUTPUT_DIR / "MasterFiles" / "model_source.xlsx",
+        "output_path": param.OUTPUT_DIR / "MasterFiles" / "sdd_regression_models_source.xlsx",
         "models": [
             {
                 "name": "Drinking",
@@ -35,7 +35,7 @@ def get_models():
             },
         ],
     }
-    
+
     return output
 
 
@@ -55,29 +55,33 @@ def create_model_drank_lastwk(df):
     df_filt = df.loc[
         df['age1315'].isin([13, 14, 15])
         & df['dallastwk'].isin([0, 1])
-        & df['version'].eq(1)
+        & df["volunsch"].eq(0)
+        & df['dflagdummydrug'].eq(0)
+        & df['dflagalcoutlier'].eq(0)
+        & df['dflagcigoutlier'].eq(0)
     ]
 
     model_response = "dallastwk"
     model_effects = [
-        #"sex",
+        "dgender",
         "age1315",
         "dfasbands",
         "dcgstg3",
-        #"dlifsat",
-        #"dlifwor",
+        # "dlifsat",
+        # "dlifwor",
         "dlifhap",
-        #"dlifanx",
-        #"dlsalc",
+        # "dlifanx",
+        # "dlsalc",
         "ddgdrugs",
-        "truant",
-        #"excla",
-        "dalfam",
-        "dalwhodr",
+        # "truant",
+        # "excla",
+        # "dalfam", -- can no longer use this variable for modelling due to
+        # --changes in the question and derivation in the 2023 survey,
         "region",
-        #"schlearn",
-        #"met4wks",
         "ethnicgp4",
+        "cgelecevr",
+        # "dloncomp",
+        # "lonlonely",
     ]
 
     dranklastwk = logit_model(
@@ -106,31 +110,34 @@ def create_model_smoker_current(df):
     df_filt = df.loc[
         df['age1315'].isin([13, 14, 15])
         & df['dcgsmk'].isin([0, 1])
-        & df['version'].eq(1)
+        & df["volunsch"].eq(0)
+        & df['dflagdummydrug'].eq(0)
+        & df['dflagalcoutlier'].eq(0)
+        & df['dflagcigoutlier'].eq(0)
     ]
 
     model_response = "dcgsmk"
     model_effects = [
-        "sex",
-        "age1315",
-        #"dfasbands",
+        "dgender",
+        # "age1315",
+        # "dfasbands",
         "dallast3",
-        #"dlifsat",
-        #"dlifwor",
-        #"dlifhap",
-        #"dlifanx",
-        #"dlssmk",
+        # "dlifsat",
+        # "dlifwor",
+        # "dlifhap",
+        # "dlifanx",
+        # "dlssmk",
         "ddgdrugs",
         "cgelecevr",
-        #"truant",
-        #"excla",
-        "dcgfam4",
-        "dcgwhosmo",
+        # "truant",
+        # "excla",
+        # "dcgfam", -- can no longer use this variable for modelling due to
+        # --changes in the question and derivation in the 2023 survey,
         "dcgppfr",
-        #"region",
-        #"schlearn",
-        #"met4wks",
-        #"ethnicgp4",
+        # "region",
+        "ethnicgp4",
+        # "dloncomp",
+        # "lonlonely",
     ]
 
     currentsmoke = logit_model(
@@ -159,28 +166,31 @@ def create_model_drugs(df):
     df_filt = df.loc[
         df['age1315'].isin([13, 14, 15])
         & df['ddgmonany'].isin([0, 1])
-        & df['version'].eq(2)
+        & df["volunsch"].eq(0)
+        & df['dflagdummydrug'].eq(0)
+        & df['dflagalcoutlier'].eq(0)
+        & df['dflagcigoutlier'].eq(0)
     ]
 
     model_response = "ddgmonany"
     model_effects = [
-        #"sex",
-        #"dfasbands",        
+        # "dgender",
+        # "dfasbands",
         "dcgstg3",
         "dallast3",
         "truant",
-        #"excla",
-        #"dlifhap",
-        #"dlifanx",
-        #"dlifwor",
-        "ddgfam",
-        #"region",
-        #"dlsdrg",
-        #"schlearn",
-        "met4wks",
+        # "excla",
+        # "dlifhap",
+        # "ddgfam", -- can no longer use this variable for modelling due to
+        # --changes in the question and derivation in the 2023 survey,
+        # "region",
+        # "dlsdrg",
         "dlifsat",
-        "age1315",  
-        #"ethnicgp4",
+        "age1315",
+        # "ethnicgp4",
+        "cgelecevr",
+        # "dloncomp",
+        # "lonlonely",
     ]
 
     drugsmonth = logit_model(

@@ -33,7 +33,7 @@ def logit_model(
             The effect variables. To test for an interaction, enter
             the variables as "effect1*effect2".
         bubble_factor: int
-            Multipying factor for bubble visualisation of model effects
+            Multiplying factor for bubble visualisation of model effects
         factor_ref: pd.DataFrame
             A dataframe with rows of variables and the reference level to use for this
             variable, defaults to value in parameters.py

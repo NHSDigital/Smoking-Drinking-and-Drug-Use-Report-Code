@@ -9,7 +9,8 @@ import xlwings as xw
 import sdd_code.utilities.parameters as param
 from sdd_code.utilities.data_import import import_sav_values
 from sdd_code.utilities import publication
-from sdd_code.utilities import derivations
+from sdd_code.utilities.field_definitions import derivations, exclusion_flags
+from sdd_code.utilities.processing import processing_exclusions, processing
 from sdd_code.utilities import chapters
 from sdd_code.utilities import difference
 from sdd_code.utilities import logger_config
@@ -18,44 +19,45 @@ from tests.run_unittests import run_all_unit_tests
 
 
 def main():
+    """
+    Main function used to run the pipeline.
+
+    Runs each element of the pipeline as determined by the run parameters in
+    parameters.py
+
+    """
+    # --- Run required import and unit tests ---
+
     # Check that input tests are passing, set flag in params to skip
     run_all_import_tests(
         pupil=param.RUN_PUPIL_INPUT_TESTS,
         teacher=param.RUN_TEACHER_INPUT_TESTS)
 
-    # Check that unit are passing, set flag in params to skip
+    # Check that unit tests are passing, set flag in params to skip
     # Currently runs the derivation and processing unit tests only
     run_all_unit_tests(
         derivations=param.RUN_DERIVATION_UNIT_TESTS,
         processing=param.RUN_PROCESSING_UNIT_TESTS)
 
-    # Execute the import data function on the pupil file
-    # this returns the filed values not labels
-    df = import_sav_values(file_path=param.PUPIL_DATA_PATH, drop_col=param.DROP_COLUMNS)
+    # --- Import the data ---
 
-    # TEMP as imd_quin should have been named imdquin in 2018 dataset (renamed in SAS)
-    if 'imd_quin' in df.columns:
-        df.rename(columns={'imd_quin': 'imdquin'}, inplace=True)
+    # Execute the import data function on the pupil file
+    df = import_sav_values(file_path=param.PUPIL_DATA_PATH, drop_col=param.DROP_COLUMNS)
 
     # Execute import data function on teacher file
     df_teacher = import_sav_values(file_path=param.TEACHER_DATA_PATH, drop_col=[])
     # Add a dummy pupil weight field (=1) so that the school data can be processed
     # using the same functions as the pupil data.
     df_teacher[param.WEIGHTING_VAR] = 1
-    # Add the STRATA for each school to the teacher dataset, merging
-    # on param.PSU, the archschn. This enables accurate standard errors and
-    # CIs to be produced based on the survey design.
-    df_teacher = pd.merge(
-        df_teacher,
-        df[[param.STRATA, param.PSU]],
-        on=param.PSU,
-        how="left")
 
-    # This removes the 2nd version of the duplicate school records that
-    # were in the 2018 dataset
-    # TODO Remove after 2018 testing complete as these will not be allowed
-    # in future dataset
-    df_teacher = df_teacher.drop_duplicates(subset=["archschn"])
+    # Temp function added for 2023 to drop extra prefixes added to some column names in
+    # teacher dataset
+    df_teacher = processing.teacher_drop_lesson_prefix(df_teacher)
+
+    # Removing volunteer schools from teacher data
+    df_teacher_filt = processing_exclusions.filter_schools(df_teacher)
+
+    # --- Add the derivations and exclusion flag columns ---
 
     # Add derived variables from the derivations module,
     # based on the list in all_derivations
@@ -65,11 +67,26 @@ def main():
         logging.info(f"Creating derivation {derivation.__name__}")
         df = derivation(df)
 
+    # Add flags used later to filter out exclusions, as set in parameters.py
+    all_flags = exclusion_flags.get_flags()
+    for flag in all_flags:
+        logging.info(f"Creating exclusion flag {flag.__name__}")
+        df = flag(df)
+
+    # --- Create a filtered version of the data (used for publication outputs) ---
+
+    # Apply school, dummy drug and outlier filters
+    df_filt = processing_exclusions.apply_exclusions(df)
+
+    # --- Write unfiltered data to external file ---
+
     # Write the final pupil and teacher data to csv
     # Flag to skip can be set in parameters
     if param.WRITE_ASSET is True:
-        publication.write_csv(df, "pupildata")
-        publication.write_csv(df_teacher, "teacherdata")
+        publication.write_csv(df_filt, "pupildata")
+        publication.write_csv(df_teacher_filt, "teacherdata")
+
+    # --- Create and write the publication outputs using the filtered data ---
 
     # Prepare the sheet content for each chapter, based on the list in all_chapters
     all_chapters = chapters.get_chapters()
@@ -102,9 +119,10 @@ def main():
             # but the value is False then use pupil, if it has no key
             # then also use pupil
             if sheet.get("teacher_table", False):
-                content_df = pd.concat([table(df_teacher) for table in sheet["content"]])
+                content_df = pd.concat([table(df_teacher_filt) for table in
+                                        sheet["content"]])
             else:
-                content_df = pd.concat([table(df) for table in sheet["content"]])
+                content_df = pd.concat([table(df_filt) for table in sheet["content"]])
 
             # Find the same table in the previous year (if it exists) and attempt to
             # compare the percentage column
@@ -124,14 +142,12 @@ def main():
 
             sht.range("A1").options(pd.DataFrame, index=False).value = content_df
 
-            logging.debug(f"Output dataframe of size {content_df.shape}")
-
         # Save and close output workbook
         logging.info(f"Finished writing to {output_path} and saving")
         wb.save(output_path)
         wb.close()
 
-        # save the chapter publication outputs (if parameter set to true)
+        # Save the chapter publication outputs (if parameter set to true)
         if param.RUN_PUBLICATION_OUTPUTS is True:
             publication.save_tables(table_path, chapter_number)
 
@@ -159,7 +175,6 @@ def main():
         logging.info("No outputs written as all CHAPTER parameters are set to False")
 
 
-# Note: Excel source data file should be closed before running the code below
 if __name__ == "__main__":
     # Setup logging
     formatted_time = time.strftime("%Y%m%d-%H%M%S")

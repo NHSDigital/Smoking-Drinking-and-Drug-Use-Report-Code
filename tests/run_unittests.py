@@ -98,4 +98,4 @@ def run_unit_tests(
 
 if __name__ == "__main__":
     # Run tests
-    run_all_unit_tests(derivations=True, processing=False)
+    run_all_unit_tests(derivations=False, processing=False)

@@ -5,7 +5,7 @@ import pandas as pd
 def import_sav_values(file_path, drop_col):
     """
     This function will import the sav (SPSS) data from the specified location.
-    It will convert column headers to lower case and remove fields as specifed.
+    It will convert column headers to lower case and remove fields as specified.
 
     Parameters:
         file_path: the full file path and name.

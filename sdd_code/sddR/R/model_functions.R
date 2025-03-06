@@ -12,9 +12,9 @@ if (file.exists(here::here("R", "utils.R"))) {
 }
 
 #' Create a survey design object and model a logistic regression
-#' for a given formula. ALso calculates ANOVA and outputs.
+#' for a given formula. Also calculates ANOVA and outputs.
 #'
-#' Used to ensure changes to the sdd survey logsitic regression
+#' Used to ensure changes to the sdd survey logistic regression
 #' only need to be made once, and to allow strings to be passed
 #' in instead of formulas for ease of use with rpy2 and command line.
 #'
@@ -97,7 +97,7 @@ sas_anova <- function(survey_model) {
 #' for a given survey model
 #'
 #' @param survey_model The complete survey model
-#' @param bubble_factor Multipying factor for bubble visualisation of model effects
+#' @param bubble_factor Multiplying factor for bubble visualisation of model effects
 #'
 #' @return A dataframe of stats, along with the overall
 #' model stats.
