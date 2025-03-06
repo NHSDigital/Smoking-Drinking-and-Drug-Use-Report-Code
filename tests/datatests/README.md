@@ -50,7 +50,7 @@ When running these tests on a new SDD `.sav` file, the metadata and underlying t
 
 ## Updating Metadata
 
-The metadata for each of the Pupil data and teacher data for SDD is stored in 2 file. These are:
+The metadata for each of the Pupil data and teacher data for SDD is stored in 2 files. These are:
 - `sdd_metadata.json`
 
 These are `.json` files, for our purposes they can be interpreted as a Python [dictionary](https://docs.python.org/3/tutorial/datastructures.html) - which are maps from "keys" to "values".
